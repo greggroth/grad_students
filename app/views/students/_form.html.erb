@@ -1,0 +1,73 @@
+<%= form_for(@student) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :year_entered %><br />
+    <%= f.number_field :year_entered %>
+  </div>
+  <div class="field">
+    <%= f.label :ms_year %><br />
+    <%= f.number_field :ms_year %>
+  </div>
+  <div class="field">
+    <%= f.label :phd_year %><br />
+    <%= f.number_field :phd_year %>
+  </div>
+  <div class="field">
+    <%= f.label :ms_semester %><br />
+    <%= f.text_field :ms_semester %>
+  </div>
+  <div class="field">
+    <%= f.label :phd_semester %><br />
+    <%= f.text_field :phd_semester %>
+  </div>
+  <div class="field">
+    <%= f.label :panther_id %><br />
+    <%= f.number_field :panther_id %>
+  </div>
+  <div class="field">
+    <%= f.label :alt_research_1 %><br />
+    <%= f.text_field :alt_research_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :alt_research_2 %><br />
+    <%= f.text_field :alt_research_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :year_left %><br />
+    <%= f.number_field :year_left %>
+  </div>
+  <div class="field">
+    <%= f.label :semester_left %><br />
+    <%= f.text_field :semester_left %>
+  </div>
+  <div class="field">
+    <%= f.label :citi_online %><br />
+    <%= f.check_box :citi_online %>
+  </div>
+  <div class="field">
+    <%= f.label :citi_discussion %><br />
+    <%= f.check_box :citi_discussion %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
