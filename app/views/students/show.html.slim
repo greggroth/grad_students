@@ -1,0 +1,73 @@
+h2 = @student.full_name
+.row
+  .span5
+    dl.dl-horizontal
+      dt Email
+      dd = mail_to @student.email_1
+      dd = @student.email_2
+      dt Phone
+      dd = @student.phone
+      dt Entered
+      dd = @student.year_entered
+      dt Alternate Research
+      dd = @student.alt_research_1
+      dd = @student.alt_research_2
+  .span4
+    dl.dl-horizontal
+      dt CITI Training
+      dd
+        - if @student.citi_online
+          span.label.label-success Online Completed
+        - else
+          span.label.label-important Online Not Completed
+      dd
+        - if @student.citi_discussion
+          span.label.label-success Discussion Completed
+        - else
+          span.label.label-important Discussion Not Completed
+.row
+  .span4
+    dl.dl-horizontal
+      dt MS Committee
+      - @student.committee_chair.each do |chair|
+        dd 
+          = link_to chair.full_name, chair
+          span.label Chair
+      - @student.ms_committee.each do |member|
+        dd = link_to member.full_name, member
+  .span4
+    dl.dl-horizontal
+      dt PhD Committee
+      - @student.committee_chair.each do |chair|
+        dd 
+          = link_to chair.full_name, chair
+          span.label Chair
+      - @student.phd_committee.each do |member|
+        dd = link_to member.full_name, member
+
+      
+
+/ 
+/ label.label= t("activerecord.attributes.student.ms_year", :default => t("activerecord.labels.ms_year", :default => "Ms year")) + ":"
+/ p= @student.ms_year
+/ label.label= t("activerecord.attributes.student.phd_year", :default => t("activerecord.labels.phd_year", :default => "Phd year")) + ":"
+/ p= @student.phd_year
+/ label.label= t("activerecord.attributes.student.ms_semester", :default => t("activerecord.labels.ms_semester", :default => "Ms semester")) + ":"
+/ p= @student.ms_semester
+/ label.label= t("activerecord.attributes.student.phd_semester", :default => t("activerecord.labels.phd_semester", :default => "Phd semester")) + ":"
+/ p= @student.phd_semester
+/ label.label= t("activerecord.attributes.student.panther_id", :default => t("activerecord.labels.panther_id", :default => "Panther")) + ":"
+/ p= @student.formatted_panther_id
+/ label.label= t("activerecord.attributes.student.alt_research_1", :default => t("activerecord.labels.alt_research_1", :default => "Alt research 1")) + ":"
+/ p= @student.alt_research_1
+/ label.label= t("activerecord.attributes.student.alt_research_2", :default => t("activerecord.labels.alt_research_2", :default => "Alt research 2")) + ":"
+/ p= @student.alt_research_2
+/ label.label= t("activerecord.attributes.student.year_left", :default => t("activerecord.labels.year_left", :default => "Year left")) + ":"
+/ p= @student.year_left
+/ label.label= t("activerecord.attributes.student.semester_left", :default => t("activerecord.labels.semester_left", :default => "Semester left")) + ":"
+/ p= @student.semester_left
+
+.form-actions
+  = link_to "Back", students_path, :class => 'btn'
+  = link_to "Edit", edit_student_path(@student), :class => 'btn'
+  = link_to "Delete", student_path(@student), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn'

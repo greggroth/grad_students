@@ -1,0 +1,17 @@
+h1 Listing professors
+= link_to 'New Professor', new_professor_path
+table.table.table-striped
+  thead
+    tr
+      th Name
+      th Email
+      th
+      th
+  tbody
+    - @professors.each do |professor|
+      tr
+        td = link_to professor.full_name, professor
+        td = mail_to professor.email
+        td = link_to 'Edit', edit_professor_path(professor)
+        td = link_to 'Destroy', professor, :method => :delete, :confirm => "#{t('web-app-theme.confirm', :default => 'Are you sure?')}"
+br

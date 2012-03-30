@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong First name:
+  = @professor.first_name
+p
+  strong Last name:
+  = @professor.last_name
+p
+  strong Email:
+  = @professor.email
+
+= link_to 'Edit', edit_professor_path(@professor)
+'|
+= link_to 'Back', professors_path

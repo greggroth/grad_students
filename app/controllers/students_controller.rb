@@ -1,12 +1,13 @@
 class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
-  def index
-    @students = Student.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @students }
+  def index    
+    if params[:graduated]
+      @page_header = "Past Students"
+      @students = Student.where('graduated = true OR left_program_early = true').order('last_name')
+    else
+      @page_header = "Current Students"
+      @students = Student.where('graduated = false AND left_program_early = false').order('last_name')
     end
   end
 

@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120329211810) do
+ActiveRecord::Schema.define(:version => 20120330204926) do
+
+  create_table "committees", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "professor_id"
+    t.boolean  "ms_chair"
+    t.boolean  "phd_chair"
+    t.boolean  "ms"
+    t.boolean  "phd"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "professors", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "legacy_id"
+  end
 
   create_table "students", :force => true do |t|
     t.string   "first_name"
@@ -28,8 +48,16 @@ ActiveRecord::Schema.define(:version => 20120329211810) do
     t.string   "semester_left"
     t.boolean  "citi_online"
     t.boolean  "citi_discussion"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "email_1"
+    t.string   "email_2"
+    t.string   "phone",              :limit => 10
+    t.integer  "legacy_id"
+    t.boolean  "left_program_early"
+    t.boolean  "graduated"
+    t.string   "lab_phone",          :limit => 10
+    t.boolean  "thesis_ms"
   end
 
 end
