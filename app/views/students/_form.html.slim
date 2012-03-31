@@ -1,61 +1,41 @@
-.clearfix
-  = f.label :first_name, t("activerecord.attributes.student.first_name", :default => "First name"), :class => :label
-  .input
-    = f.text_field :first_name, :class => 'text_field'
-.clearfix
-  = f.label :last_name, t("activerecord.attributes.student.last_name", :default => "Last name"), :class => :label
-  .input
-    = f.text_field :last_name, :class => 'text_field'
-.clearfix
-  = f.label :year_entered, t("activerecord.attributes.student.year_entered", :default => "Year entered"), :class => :label
-  .input
-    = f.number_field :year_entered, :class => 'number_field'
-.clearfix
-  = f.label :ms_year, t("activerecord.attributes.student.ms_year", :default => "Ms year"), :class => :label
-  .input
-    = f.number_field :ms_year, :class => 'number_field'
-.clearfix
-  = f.label :phd_year, t("activerecord.attributes.student.phd_year", :default => "Phd year"), :class => :label
-  .input
-    = f.number_field :phd_year, :class => 'number_field'
-.clearfix
-  = f.label :ms_semester, t("activerecord.attributes.student.ms_semester", :default => "Ms semester"), :class => :label
-  .input
-    = f.text_field :ms_semester, :class => 'text_field'
-.clearfix
-  = f.label :phd_semester, t("activerecord.attributes.student.phd_semester", :default => "Phd semester"), :class => :label
-  .input
-    = f.text_field :phd_semester, :class => 'text_field'
-.clearfix
-  = f.label :panther_id, t("activerecord.attributes.student.panther_id", :default => "Panther"), :class => :label
-  .input
-    = f.number_field :panther_id, :class => 'number_field'
-.clearfix
-  = f.label :alt_research_1, t("activerecord.attributes.student.alt_research_1", :default => "Alt research 1"), :class => :label
-  .input
-    = f.text_field :alt_research_1, :class => 'text_field'
-.clearfix
-  = f.label :alt_research_2, t("activerecord.attributes.student.alt_research_2", :default => "Alt research 2"), :class => :label
-  .input
-    = f.text_field :alt_research_2, :class => 'text_field'
-.clearfix
-  = f.label :year_left, t("activerecord.attributes.student.year_left", :default => "Year left"), :class => :label
-  .input
-    = f.number_field :year_left, :class => 'number_field'
-.clearfix
-  = f.label :semester_left, t("activerecord.attributes.student.semester_left", :default => "Semester left"), :class => :label
-  .input
-    = f.text_field :semester_left, :class => 'text_field'
-.clearfix
-  = f.label :citi_online, t("activerecord.attributes.student.citi_online", :default => "Citi online"), :class => :label
-  .input
-    = f.check_box :citi_online, :class => 'check_box'
-.clearfix
-  = f.label :citi_discussion, t("activerecord.attributes.student.citi_discussion", :default => "Citi discussion"), :class => :label
-  .input
-    = f.check_box :citi_discussion, :class => 'check_box'
+= semantic_form_for @student, :html => {:class => "well"} do |f|
+  - if @student.errors.any?
+    .row
+      .span6.offset1
+        .alert.alert-error
+          | Houston we have some issues:
+          ul
+            - @student.errors.full_messages.each do |msg|
+              li = msg
+  = f.inputs do
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :panther_id
+    = f.input :year_entered
+    = f.label "Masters", class: "inline"
+    = f.select :ms_semester, ["Spring", "Fall"]
+    = f.text_field :ms_year
+    = f.label "PhD", class: "inline"
+    = f.select :phd_semester, ["Spring", "Fall"]
+    = f.text_field :phd_year
+    = f.label "Alternate Research Skills"
+    = f.text_field :alt_research_1
+    = f.text_field :alt_research_2
+    = f.input :citi_online
+    = f.input :citi_discussion
 
-.form-actions
-  button class="btn primary" type="submit" Save
-  | or
-  = link_to "Cancel", students_path
+
+/ .clearfix
+/   = f.label :year_left, t("activerecord.attributes.student.year_left", :default => "Year left"), :class => :label
+/   .input
+/     = f.number_field :year_left, :class => 'number_field'
+/ .clearfix
+/   = f.label :semester_left, t("activerecord.attributes.student.semester_left", :default => "Semester left"), :class => :label
+/   .input
+/     = f.text_field :semester_left, :class => 'text_field'
+
+/ 
+/ .form-actions
+/   button class="btn primary" type="submit" Save
+/   | or
+/   = link_to "Cancel", students_path

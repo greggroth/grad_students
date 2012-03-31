@@ -1,14 +1,23 @@
-p#notice = notice
+h1 = @professor.full_name
+p = mail_to @professor.email
 
-p
-  strong First name:
-  = @professor.first_name
-p
-  strong Last name:
-  = @professor.last_name
-p
-  strong Email:
-  = @professor.email
+h2 Students
+table.table.table-striped
+  thead
+    tr
+      th Name
+      th E-mail
+      th
+  tbody
+    - @professor.students.each do |student|
+      tr
+        td = link_to student.full_name, student
+        td = mail_to student.email_1
+        td
+          - if @professor.chaired?(student)
+            span.label Chair
+        
+      
 
 = link_to 'Edit', edit_professor_path(@professor)
 '|

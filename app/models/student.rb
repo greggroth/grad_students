@@ -10,8 +10,12 @@ class Student < ActiveRecord::Base
     "#{panther_id.to_s[(0..2)]}-#{panther_id.to_s[(3..4)]}-#{panther_id.to_s[(5..8)]}"
   end
   
-  def committee_chair
-    professors.where("ms_chair = true OR phd_chair = true")
+  def ms_committee_chair
+    professors.where("ms_chair = true")
+  end
+  
+  def phd_committee_chair
+    professors.where("phd_chair = true")
   end
   
   def phd_committee
@@ -20,5 +24,9 @@ class Student < ActiveRecord::Base
   
   def ms_committee
     professors.where('ms_chair = false AND phd_chair = false AND ms = true')
+  end
+  
+  def phd_student?
+    phd_year.present?
   end
 end

@@ -1,4 +1,5 @@
 h2 = @student.full_name
+h3 = @student.phd_student? ? "PhD Student" : "Masters Student"
 .row
   .span5
     dl.dl-horizontal
@@ -6,12 +7,21 @@ h2 = @student.full_name
       dd = mail_to @student.email_1
       dd = @student.email_2
       dt Phone
-      dd = @student.phone
+      dd = number_to_phone @student.phone
       dt Entered
       dd = @student.year_entered
       dt Alternate Research
-      dd = @student.alt_research_1
-      dd = @student.alt_research_2
+      dd 
+        - if @student.alt_research_1.present?
+          = @student.alt_research_1
+        - else
+          span.label.label-important Alternate Research Not Met
+      - if @student.phd_student?
+        dd 
+          - if @student.alt_research_2.present?
+            = @student.alt_research_2
+          - else
+            span.label.label-important Alternate Research Not Met
   .span4
     dl.dl-horizontal
       dt CITI Training
@@ -29,21 +39,22 @@ h2 = @student.full_name
   .span4
     dl.dl-horizontal
       dt MS Committee
-      - @student.committee_chair.each do |chair|
+      - @student.ms_committee_chair.each do |chair|
         dd 
           = link_to chair.full_name, chair
           span.label Chair
       - @student.ms_committee.each do |member|
         dd = link_to member.full_name, member
-  .span4
-    dl.dl-horizontal
-      dt PhD Committee
-      - @student.committee_chair.each do |chair|
-        dd 
-          = link_to chair.full_name, chair
-          span.label Chair
-      - @student.phd_committee.each do |member|
-        dd = link_to member.full_name, member
+  - if @student.phd_student?
+    .span4
+      dl.dl-horizontal
+        dt PhD Committee
+        - @student.phd_committee_chair.each do |chair|
+          dd 
+            = link_to chair.full_name, chair
+            span.label Chair
+        - @student.phd_committee.each do |member|
+          dd = link_to member.full_name, member
 
       
 
