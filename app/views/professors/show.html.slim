@@ -7,14 +7,16 @@ table.table.table-striped
     tr
       th Name
       th E-mail
+      th MS/PhD
       th
   tbody
-    - @professor.students.each do |student|
+    - @professor.committees.each do |committee|
       tr
-        td = link_to student.full_name, student
-        td = mail_to student.email_1
+        td = link_to committee.student.full_name, committee.student
+        td = mail_to committee.student.email_1
+        td = committee_type(committee)
         td
-          - if @professor.chaired?(student)
+          - if @professor.chaired?(committee.student)
             span.label Chair
         
       
