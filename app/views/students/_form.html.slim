@@ -27,17 +27,7 @@
       = f.text_field :alt_research_1
       br
       = f.text_field :alt_research_2, class: "phd-only"
-  = f.inputs "Current Status" do
-    row
-      .span3
-        table.table
-          tbody
-            tr
-              td = f.label :graduated, "Graduated"
-              td = f.check_box :graduated
-            tr
-              td = f.label :left_program_early, "Left Early"
-              td = f.check_box :left_program_early
+      = f.input :status, as: :radio, collection: ["Current student", "Graduated", "Left program early"]
   = f.inputs 'CITI Training' do
     row
       .span3
@@ -54,10 +44,10 @@
       thead
         tr
           th Name
-          th Masters
-          th PhD
-          th MS Chair
-          th PhD Chair
+          th.check Masters
+          th.check PhD
+          th.check MS Chair
+          th.check PhD Chair
           th
       tbody#committee
         = f.semantic_fields_for :committees

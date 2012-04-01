@@ -1,4 +1,9 @@
-h2 = @student.full_name
+h2 
+  = @student.full_name
+  - if @student.status == "Left program early"
+    span.label.label-warning Left Early
+  - if @student.status == "Graduated"
+    span.label.label-success Graduated
 h3 = "#{@student.degree} student"
 .row
   .span5
@@ -22,6 +27,11 @@ h3 = "#{@student.degree} student"
             = @student.alt_research_2
           - else
             span.label.label-important Alternate Research Not Met
+      dt Expected Masters
+      dd = "#{@student.ms_semester} #{@student.ms_year}"
+      - if @student.phd_student?
+        dt Expected PhD
+        dd = "#{@student.phd_semester} #{@student.phd_year}"
   .span4
     dl.dl-horizontal
       dt CITI Training

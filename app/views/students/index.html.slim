@@ -4,7 +4,8 @@ table.table.table-striped
   thead
     tr
       th Name
-      th 
+      th E-mail
+      th
       th
   tbody
     - @students.each do |student|
@@ -13,5 +14,6 @@ table.table.table-striped
           = link_to student.full_name, student_path(student)
           - if student.left_program_early
             span.label.label-warning Left Early
+        td = mail_to student.email_1
         td = link_to "Edit", edit_student_path(student)
         td = link_to "Destroy", student_path(student), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"

@@ -4,6 +4,7 @@ class Student < ActiveRecord::Base
   accepts_nested_attributes_for :committees, allow_destroy: true
   validates_associated :committees
   validates_presence_of :first_name, :last_name, :degree
+  validate :left_early_or_graduated
   
   def full_name
     "#{self.first_name} #{self.last_name}"
@@ -36,11 +37,17 @@ class Student < ActiveRecord::Base
   end
   
   def self.current_students
-    self.where('graduated = false AND left_program_early = false')
+    self.where('status = ?', "Current student")
   end
   
   def self.past_students
-    self.where('graduated = true OR left_program_early = true')
-    
+    self.where('status != ?', "Current student")
+  end
+  
+  private
+  def left_early_or_graduated
+    if left_program_early && graduated
+      errors[:base] <<  "can not be set as left early and graduated"
+    end
   end
 end

@@ -1,7 +1,7 @@
 tr.fields
   td = f.input :professor, label: false
-  td = f.check_box :ms
-  td = f.check_box :phd
-  td = f.check_box :ms_chair
-  td = f.check_box :phd_chair
+  td.check = f.check_box :ms
+  td.check = f.check_box :phd
+  td.check = f.check_box :ms_chair
+  td.check = f.check_box :phd_chair
   td = f.link_to_remove "X"
