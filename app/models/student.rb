@@ -32,4 +32,13 @@ class Student < ActiveRecord::Base
   def phd_student?
     degree == "PhD"
   end
+  
+  def self.current_students
+    self.where('graduated = false AND left_program_early = false')
+  end
+  
+  def self.past_students
+    self.where('graduated = true OR left_program_early = true')
+    
+  end
 end

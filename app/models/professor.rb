@@ -21,4 +21,12 @@ class Professor < ActiveRecord::Base
     students.where('phd_chair = true OR ms_chair = true').include? student
   end
   
+  def current_committees
+    committees.joins(:student).where("students.graduated = false AND students.left_program_early = false")
+  end
+  
+  def past_committees
+    committees.joins(:student).where("students.graduated = true OR students.left_program_early = true")
+  end
+  
 end

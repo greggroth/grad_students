@@ -2,12 +2,12 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index    
-    if params[:graduated]
+    if params[:past]
       @page_header = "Past Students"
-      @students = Student.where('graduated = true OR left_program_early = true').order('last_name')
+      @students = Student.past_students.order('last_name')
     else
       @page_header = "Current Students"
-      @students = Student.where('graduated = false AND left_program_early = false').order('last_name')
+      @students = Student.current_students.order('last_name')
     end
   end
 

@@ -1,7 +1,7 @@
 h1 = @professor.full_name
 p = mail_to @professor.email
 
-h2 Students
+h2 Current Student Committees
 table.table.table-striped
   thead
     tr
@@ -10,7 +10,7 @@ table.table.table-striped
       th MS/PhD
       th
   tbody
-    - @professor.committees.each do |committee|
+    - @current_students.each do |committee|
       tr
         td = link_to committee.student.full_name, committee.student
         td = mail_to committee.student.email_1
@@ -21,6 +21,6 @@ table.table.table-striped
         
       
 
-= link_to 'Edit', edit_professor_path(@professor)
+= link_to 'Edit ', edit_professor_path(@professor)
 '|
 = link_to 'Back', professors_path
