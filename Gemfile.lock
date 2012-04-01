@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/ritchiey/nested_form.git
+  revision: 4bdbaf73d1ddd6f0f3ed56023e6ac542442a73a3
+  specs:
+    nested_form (0.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -204,6 +210,7 @@ DEPENDENCIES
   formtastic-bootstrap
   jquery-rails
   less-rails
+  nested_form!
   pg
   pry
   pry-doc

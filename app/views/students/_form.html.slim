@@ -1,4 +1,4 @@
-= semantic_form_for @student, :html => {:class => "well"} do |f|
+= semantic_nested_form_for @student, :html => {:class => "well"} do |f|
   - if @student.errors.any?
     .row
       .span6.offset1
@@ -7,24 +7,49 @@
           ul
             - @student.errors.full_messages.each do |msg|
               li = msg
-  = f.inputs do
+  = f.inputs "Basic Information" do
     = f.input :first_name
     = f.input :last_name
-    = f.input :panther_id
+    = f.input :panther_id, label: "Panther ID"
     = f.input :year_entered
-    = f.label "Masters", class: "inline"
+    = f.label "Masters"
     = f.select :ms_semester, ["Spring", "Fall"]
     = f.text_field :ms_year
-    = f.label "PhD", class: "inline"
+    = f.label :phd_semester, "PhD"
     = f.select :phd_semester, ["Spring", "Fall"]
     = f.text_field :phd_year
     = f.label "Alternate Research Skills"
     = f.text_field :alt_research_1
+    br
     = f.text_field :alt_research_2
-    = f.input :citi_online
-    = f.input :citi_discussion
-
-
+  = f.inputs 'CITI Training' do
+    row
+      .span3
+        table.table
+          tbody
+            tr 
+              td = f.label :citi_online, "CITI Online Training"
+              td = f.check_box :citi_online
+            tr
+              td = f.label :citi_discussion, "CITI In-class Discussion"
+              td = f.check_box :citi_discussion
+  = f.inputs 'Committee Members' do
+    table.table
+      thead
+        tr
+          th Name
+          th Masters
+          th PhD
+          th MS Chair
+          th PhD Chair
+          th
+      tbody#committee
+        = f.semantic_fields_for :committees
+  = f.link_to_add "Add a member", :committees, container: 'tbody#committee', fields_element: 'tr'
+  .form-actions
+    = f.submit "Submit", class: "btn btn-primary"
+    = link_to "Cancel", @student, class: "btn btn-cancel"
+    
 / .clearfix
 /   = f.label :year_left, t("activerecord.attributes.student.year_left", :default => "Year left"), :class => :label
 /   .input

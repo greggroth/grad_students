@@ -1,6 +1,9 @@
 class Student < ActiveRecord::Base
-  has_many :committees
+  has_many :committees, dependent: :destroy
   has_many :professors, through: :committees
+  accepts_nested_attributes_for :committees, allow_destroy: true
+  validates_associated :committees
+  validates_presence_of :first_name, :last_name
   
   def full_name
     "#{self.first_name} #{self.last_name}"

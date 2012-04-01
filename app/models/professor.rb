@@ -1,6 +1,8 @@
 class Professor < ActiveRecord::Base
-  has_many :committees
+  has_many :committees, dependent: :destroy
   has_many :students, through: :committees
+  validates_presence_of :first_name, :last_name
+  validates_associated :committees
 
 
   def full_name
