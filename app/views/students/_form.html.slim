@@ -8,20 +8,21 @@
             - @student.errors.full_messages.each do |msg|
               li = msg
   = f.inputs "Basic Information" do
-    = f.input :first_name
-    = f.input :last_name
+    = f.input :first_name, required: true
+    = f.input :last_name, required: true
     = f.input :panther_id, label: "Panther ID"
+    = f.input :degree, as: :select, collection: ["Masters", "PhD"], default: "PhD", prompt: true, required: true
     = f.input :year_entered
-    = f.label "Masters"
-    = f.select :ms_semester, ["Spring", "Fall"]
+    = f.label :ms_semester, "Expected Masters Graduation Date"
+    = f.select :ms_semester, ["Spring", "Summer", "Fall"]
     = f.text_field :ms_year
-    = f.label :phd_semester, "PhD"
-    = f.select :phd_semester, ["Spring", "Fall"]
-    = f.text_field :phd_year
+    = f.label :phd_semester, "Expected PhD Graduation Date", class: "phd-only"
+    = f.select :phd_semester, ["Spring", "Summer", "Fall"], {}, {class: "phd-only"}
+    = f.text_field :phd_year, class: "phd-only"
     = f.label "Alternate Research Skills"
     = f.text_field :alt_research_1
     br
-    = f.text_field :alt_research_2
+    = f.text_field :alt_research_2, class: "phd-only"
   = f.inputs 'CITI Training' do
     row
       .span3

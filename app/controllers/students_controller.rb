@@ -26,6 +26,7 @@ class StudentsController < ApplicationController
   # GET /students/new.json
   def new
     @student = Student.new
+    3.times { @student.committees.build }
 
     respond_to do |format|
       format.html # new.html.erb

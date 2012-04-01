@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120330204926) do
+ActiveRecord::Schema.define(:version => 20120401195116) do
 
   create_table "committees", :force => true do |t|
     t.integer  "student_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20120330204926) do
     t.boolean  "graduated"
     t.string   "lab_phone",          :limit => 10
     t.boolean  "thesis_ms"
+    t.string   "degree"
   end
 
 end

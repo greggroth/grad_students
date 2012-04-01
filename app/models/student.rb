@@ -3,7 +3,7 @@ class Student < ActiveRecord::Base
   has_many :professors, through: :committees
   accepts_nested_attributes_for :committees, allow_destroy: true
   validates_associated :committees
-  validates_presence_of :first_name, :last_name
+  validates_presence_of :first_name, :last_name, :degree
   
   def full_name
     "#{self.first_name} #{self.last_name}"
@@ -30,6 +30,6 @@ class Student < ActiveRecord::Base
   end
   
   def phd_student?
-    phd_year.present?
+    degree == "PhD"
   end
 end
