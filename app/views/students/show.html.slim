@@ -39,21 +39,21 @@ h3 = "#{@student.degree} student"
   .span4
     dl.dl-horizontal
       dt MS Committee
-      - @student.ms_committee_chair.each do |chair|
+      - @student.committee(:ms_chair).each do |chair|
         dd 
           = link_to chair.full_name, chair
           span.label Chair
-      - @student.ms_committee.each do |member|
+      - @student.committee(:ms_members).each do |member|
         dd = link_to member.full_name, member
   - if @student.phd_student?
     .span4
       dl.dl-horizontal
         dt PhD Committee
-        - @student.phd_committee_chair.each do |chair|
+        - @student.committee(:phd_chair).each do |chair|
           dd 
             = link_to chair.full_name, chair
             span.label Chair
-        - @student.phd_committee.each do |member|
+        - @student.committee(:phd_members).each do |member|
           dd = link_to member.full_name, member
 
       

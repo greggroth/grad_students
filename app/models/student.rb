@@ -13,20 +13,22 @@ class Student < ActiveRecord::Base
     "#{panther_id.to_s[(0..2)]}-#{panther_id.to_s[(3..4)]}-#{panther_id.to_s[(5..8)]}"
   end
   
-  def ms_committee_chair
-    professors.where("ms_chair = true")
-  end
-  
-  def phd_committee_chair
-    professors.where("phd_chair = true")
-  end
-  
-  def phd_committee
-    professors.where('ms_chair = false AND phd_chair = false AND phd = true')
-  end
-  
-  def ms_committee
-    professors.where('ms_chair = false AND phd_chair = false AND ms = true')
+  def committee(options = {})
+    # puts options.has_key? :ms
+    case options
+    when :ms
+      professors.where('ms = true')
+    when :phd
+      professors.where('phd = true')
+    when :ms_chair
+      professors.where("ms_chair = true")
+    when :phd_chair
+      professors.where("phd_chair = true")
+    when :ms_members
+      professors.where('ms_chair = false AND ms = true')
+    when :phd_members
+      professors.where('phd_chair = false AND phd = true')
+    end
   end
   
   def phd_student?
