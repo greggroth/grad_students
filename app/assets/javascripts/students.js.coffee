@@ -7,10 +7,7 @@ $('a#add-committee-member').click (e) ->
   console.log("Clicked")
   
 $('#student_degree').change (e) ->
-  console.log(e.target)
   if e.target.value == "Masters"
-    console.log('True')
     $('.phd-only').hide()
-  # else
-  #   console.log('False')
-  #   $('.phd-only').show
+  else
+    $('.phd-only').show()
