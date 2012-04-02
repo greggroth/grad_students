@@ -1,5 +1,5 @@
-label class="label"= t("activerecord.attributes.meeting.date", :default => t("activerecord.labels.date", :default => "Date")) + ":"
-p= @meeting.date
+label.label Date
+p = display_date(@meeting.date)
 label class="label"= t("activerecord.attributes.meeting.notes", :default => t("activerecord.labels.notes", :default => "Notes")) + ":"
 p= @meeting.notes
 

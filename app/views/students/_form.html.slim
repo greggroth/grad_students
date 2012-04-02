@@ -99,7 +99,7 @@
             
   .form-actions
     = f.submit "Submit", class: "btn btn-primary"
-    = link_to "Cancel", @student, class: "btn btn-cancel"
+    = link_to "Cancel", students_path, class: "btn btn-cancel"
     
 / .clearfix
 /   = f.label :year_left, t("activerecord.attributes.student.year_left", :default => "Year left"), :class => :label

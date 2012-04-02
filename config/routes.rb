@@ -1,4 +1,6 @@
 GradStudents::Application.routes.draw do
+  devise_for :professors
+
   root to: "students#index"
 
   resources :professors

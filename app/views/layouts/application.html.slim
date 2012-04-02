@@ -43,7 +43,18 @@ html lang="en"
               li= link_to "Faculty", professors_path
               li= link_to "Meetings", meetings_path
     .container
-
+      - if flash[:alert]
+        .row
+          .span6.offset3
+            .alert.alert-error
+              a.close data-dismiss="alert" &times;
+              = flash[:alert]
+      - if flash[:notice]
+        .row
+          .span6.offset3
+            .alert.alert-info
+              a.close data-dismiss="alert" &times;
+              = flash[:notice]
       .content
         .row
           .span9

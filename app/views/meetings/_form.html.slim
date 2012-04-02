@@ -1,13 +1,20 @@
-.clearfix
-  = f.label :date, t("activerecord.attributes.meeting.date", :default => "Date"), :class => :label
-  .input
-    = f.datetime_select :date, :class => 'datetime_select'
-.clearfix
-  = f.label :notes, t("activerecord.attributes.meeting.notes", :default => "Notes"), :class => :label
-  .input
-    = f.text_area :notes, :class => 'text_area'
-
-.form-actions
-  button class="btn primary" type="submit" Save
-  | or
-  = link_to "Cancel", meetings_path
+= semantic_nested_form_for @meeting, html: { class: "well" } do |f|
+  = f.inputs do
+    = f.label :date, "Date"
+    = f.datetime_select :date, { ampm: true }, { class: "datetime_select" }
+    = f.input :notes
+  = f.inputs "Attendees" do
+    table.table
+      thead
+        tr
+          th Name
+          th
+      tbody#committee
+        = f.fields_for :students do |fs|
+          tr.fields
+            / td = fs.input :student, as: :select, collection: Student.order('last_name').map{|s| [s.full_name,s.id]}, label: false, input_html: {class: "narrow"}
+            td = fs.input :student, as: :select, collection: Student.order('last_name'), label: false, input_html: {class: "narrow"}
+            td = fs.link_to_remove "X"
+    .form-actions
+      = f.submit "Submit", class: "btn btn-primary"
+      = link_to "Cancel", meetings_path, class: "btn btn-cancel"

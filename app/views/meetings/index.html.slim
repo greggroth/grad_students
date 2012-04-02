@@ -1,17 +1,18 @@
 h1 Meetings
+= link_to "New meeting", new_meeting_path
 table class="table table-striped"
   thead
     tr
       th Date
+      th Attendees
       th Notes
       th 
   tbody
     - @meetings.each do |meeting|
       tr
-        td= link_to meeting.date, meeting_path(meeting)
-        td= truncate(meeting.notes, length: 100)
+        td = link_to display_date(meeting.date), meeting_path(meeting)
+        td = meeting.students.count
+        td = truncate(meeting.notes, length: 100)
         td
           = link_to "Edit", edit_meeting_path(meeting)
           = link_to "Destroy", meeting_path(meeting), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
-
-= link_to "New", new_meeting_path, :class => 'btn btn-primary'
