@@ -1,5 +1,6 @@
 class Committee < ActiveRecord::Base
   validates_presence_of :professor_id, :student_id
+  validates_uniqueness_of :professor_id, scope: :student_id
   validate :ms_or_phd_selected?
   
   belongs_to :professor

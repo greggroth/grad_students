@@ -1,0 +1,21 @@
+dt.breathing-room Qualifying Exams
+dd
+  - if student.qualifier.em
+    span.label.label-success Electricity and Magnetism
+  - else
+    span.label.label-important E&M Not Completed
+dd 
+  - if student.qualifier.stat_mech
+    span.label.label-success Statistical Mechanics
+  - else
+    span.label.label-important Stat. Mech. Not Completed
+dd 
+  - if student.qualifier.class_mech
+    span.label.label-success Classical Mechanics
+  - else
+    span.label.label-important Class. Mech. Not Completed
+dd 
+  - if student.qualifier.quantum
+    span.label.label-success Quantum Mechanics
+  - else
+    span.label.label-important Quantum Mech. Not Completed

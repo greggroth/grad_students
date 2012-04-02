@@ -42,6 +42,8 @@ html lang="en"
                   li= link_to "New Student", new_student_path
               li= link_to "Faculty", professors_path
               li= link_to "Meetings", meetings_path
+    - if professor_signed_in?
+      li.nav-right == "Welcome, #{current_professor.full_name} (#{link_to('logout', destroy_professor_session_path, :method => :delete)} or #{link_to('change password', edit_professor_registration_path)})"
     .container
       - if flash[:alert]
         .row
@@ -61,13 +63,14 @@ html lang="en"
             = yield
           .span1 &nbsp;
           .span3
-            .well.sidebar-nav
-              h3 Sidebar
-              ul.nav.nav-list
-                li.nav-header Sidebar
-                li= link_to "Link 1", "/path1"
-                li= link_to "Link 2", "/path2"
-                li= link_to "Link 3", "/path3"
+            .well.sidebar-nav        
+              - if content_for?(:sidebar)
+                ul.nav.nav-list
+                  = yield(:sidebar)
+              - else
+                h3 Related Links
+                ul.nav.nav-list
+                  li = link_to "Physics Department Website", "http://www.phy-astr.gsu.edu/"
     
       footer
         p &copy; 2012 Georgia State University Department of Physics and Astronomy

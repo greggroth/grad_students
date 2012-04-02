@@ -1,13 +1,17 @@
 class Student < ActiveRecord::Base
-  has_one :qualifier
+  has_one :qualifier, dependent: :destroy
   has_many :committees, dependent: :destroy
   has_many :professors, through: :committees
-  has_and_belongs_to_many :meetings
+  has_and_belongs_to_many :meetings, uniq: true
   accepts_nested_attributes_for :committees, allow_destroy: true
   accepts_nested_attributes_for :qualifier
+  
   validates_associated :committees
   validates_presence_of :first_name, :last_name, :degree
   validate :left_early_or_graduated
+  validates_uniqueness_of :last_name, scope: :first_name
+  
+  after_create :check_for_qualifier
   
   def full_name
     "#{self.first_name} #{self.last_name}"
@@ -58,6 +62,12 @@ class Student < ActiveRecord::Base
   def left_early_or_graduated
     if left_program_early && graduated
       errors[:base] <<  "can not be set as left early and graduated"
+    end
+  end
+  
+  def check_for_qualifiers
+    if qualifier.nil?
+      build_qualifier
     end
   end
 end

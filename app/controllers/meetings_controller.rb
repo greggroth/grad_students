@@ -16,11 +16,7 @@ class MeetingsController < ApplicationController
   end
   
   def create
-    students = params[:meeting].delete('students')
     @meeting = Meeting.new(params[:meeting])
-    students.each do |student, id|
-      @meeting.students << Student.find(id) unless id.blank?
-    end
     
     respond_to do |format|
       if @meeting.save
@@ -35,7 +31,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.find(params[:id])
     
     respond_to do |format|
-      if @student.update_attributes(params[:meeting])
+      if @meeting.update_attributes(params[:meeting])
         format.html { redirect_to @meeting, notice: 'Meeting was successfully updated.' }
       else
         format.html { render action: "edit" }

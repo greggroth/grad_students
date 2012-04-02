@@ -1,7 +1,12 @@
-label.label Date
-p = display_date(@meeting.date)
-label class="label"= t("activerecord.attributes.meeting.notes", :default => t("activerecord.labels.notes", :default => "Notes")) + ":"
-p= @meeting.notes
+h2 = display_date(@meeting.date)
+
+dl.dl-horizontal
+  dt Notes
+  dd = @meeting.notes || "(None)"
+  dt Attendees (#{@meeting.students.count})
+  - @meeting.students.each do |student|
+    dd = link_to student.full_name, student
+
 
 .form-actions
   = link_to "Back", meetings_path, :class => 'btn'

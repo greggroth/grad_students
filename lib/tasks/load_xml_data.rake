@@ -55,6 +55,30 @@ namespace :import do
       )
     end
   end
+  
+  task :meetings, [:file_path] => [:environment] do |t, args|
+    doc = Hash.from_xml(File.open(args[:file_path]))
+    doc["dataroot"]["Meetings"].each do |meeting|
+      Meeting.create(
+        date:       DateTime.strptime(meeting["MeetingDate"], '%Y-%m-%dT%H:%M:%S'),
+        legacy_id:  meeting["ID"]
+      )
+      puts "#{meeting["MeetingDate"]} Added"
+    end
+  end  
+  
+  task :student_meetings, [:file_path] => [:environment] do |t, args|
+    doc = Hash.from_xml(File.open(args[:file_path]))
+    doc["dataroot"]["StudentMeetings"].each do |student_meeting|
+      meeting = Meeting.find_by_legacy_id(student_meeting["MeetingID"])
+      student = Student.find_by_legacy_id(student_meeting["StudentID"])
+      if student_meeting["Attended"] == "1"
+        student.meetings << meeting
+        student.save
+      end
+      puts "Added a meeting (id: #{meeting.id}) for student (id: #{student.id})"
+    end  
+  end
 
   task :test, :message do |t, args|
     puts "Arugments: #{args}"
