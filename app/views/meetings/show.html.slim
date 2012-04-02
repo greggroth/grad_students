@@ -1,0 +1,9 @@
+label class="label"= t("activerecord.attributes.meeting.date", :default => t("activerecord.labels.date", :default => "Date")) + ":"
+p= @meeting.date
+label class="label"= t("activerecord.attributes.meeting.notes", :default => t("activerecord.labels.notes", :default => "Notes")) + ":"
+p= @meeting.notes
+
+.form-actions
+  = link_to "Back", meetings_path, :class => 'btn'
+  = link_to "Edit", edit_meeting_path(@meeting), :class => 'btn'
+  = link_to "Delete", meeting_path(@meeting), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn'

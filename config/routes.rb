@@ -1,11 +1,9 @@
 GradStudents::Application.routes.draw do
   root to: "students#index"
-  match 'students/new_row' => 'students#add_committee_row'
 
   resources :professors
-  resources :faculties
   resources :students
-  resources :professors
+  resources :meetings
   
 
   # The priority is based upon order of creation:

@@ -2,6 +2,7 @@ class Student < ActiveRecord::Base
   has_one :qualifier
   has_many :committees, dependent: :destroy
   has_many :professors, through: :committees
+  has_and_belongs_to_many :meetings
   accepts_nested_attributes_for :committees, allow_destroy: true
   accepts_nested_attributes_for :qualifier
   validates_associated :committees

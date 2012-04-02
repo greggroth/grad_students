@@ -1,0 +1,13 @@
+.clearfix
+  = f.label :date, t("activerecord.attributes.meeting.date", :default => "Date"), :class => :label
+  .input
+    = f.datetime_select :date, :class => 'datetime_select'
+.clearfix
+  = f.label :notes, t("activerecord.attributes.meeting.notes", :default => "Notes"), :class => :label
+  .input
+    = f.text_area :notes, :class => 'text_area'
+
+.form-actions
+  button class="btn primary" type="submit" Save
+  | or
+  = link_to "Cancel", meetings_path

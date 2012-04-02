@@ -84,11 +84,5 @@ class StudentsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  # def add_committee_row
-  #   
-  #   respond_to do |format|
-  #     format.html render partial: 'students/committee_member', locals: { c: Committee.new }
-  #   end
-  # end
+
 end

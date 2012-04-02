@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120402014031) do
+ActiveRecord::Schema.define(:version => 20120402021304) do
 
   create_table "committees", :force => true do |t|
     t.integer  "student_id"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(:version => 20120402014031) do
     t.boolean  "phd"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "meetings", :force => true do |t|
+    t.datetime "date"
+    t.text     "notes"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "meetings_students", :force => true do |t|
+    t.integer "student_id"
+    t.integer "meeting_id"
   end
 
   create_table "professors", :force => true do |t|
