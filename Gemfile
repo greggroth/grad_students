@@ -33,6 +33,7 @@ group :development do
   gem 'pry-rails'
   gem 'pry'
   gem 'pry-doc'
+  gem 'awesome_print'
 end
 
 group :test do

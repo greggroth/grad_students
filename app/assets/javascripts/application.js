@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.inputmask
+//= require jquery.inputmask.extensions
 //= require twitter/bootstrap
 //= require jquery_nested_form
 //= require students

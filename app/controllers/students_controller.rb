@@ -25,7 +25,8 @@ class StudentsController < ApplicationController
   # GET /students/new
   # GET /students/new.json
   def new
-    @student = Student.new
+    @student = Student.new(ms_year: Time.now.year, phd_year: Time.now.year, status: "Current student")
+    @student.build_default_qualifier
     3.times { @student.committees.build }
 
     respond_to do |format|
@@ -37,6 +38,7 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
     @student = Student.find(params[:id])
+    @student.build_default_qualifier if @student.qualifier.nil?
   end
 
   # POST /students

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120401214214) do
+ActiveRecord::Schema.define(:version => 20120402014031) do
 
   create_table "committees", :force => true do |t|
     t.integer  "student_id"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(:version => 20120401214214) do
     t.integer  "legacy_id"
   end
 
+  create_table "qualifiers", :force => true do |t|
+    t.boolean  "class_mech"
+    t.boolean  "stat_mech"
+    t.boolean  "em"
+    t.boolean  "quantum"
+    t.integer  "attempts"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "student_id"
+  end
+
   create_table "students", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -41,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20120401214214) do
     t.integer  "phd_year"
     t.string   "ms_semester"
     t.string   "phd_semester"
-    t.integer  "panther_id"
+    t.string   "panther_id"
     t.string   "alt_research_1"
     t.string   "alt_research_2"
     t.integer  "year_left"

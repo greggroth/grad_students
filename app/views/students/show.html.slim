@@ -4,13 +4,15 @@ h2
     span.label.label-warning Left Early
   - if @student.status == "Graduated"
     span.label.label-success Graduated
-h3 = "#{@student.degree} student"
+h3 = formatted_degree(@student)
 .row
   .span5
     dl.dl-horizontal
       dt Email
       dd = mail_to @student.email_1
-      dd = @student.email_2
+      dd = mail_to @student.email_2
+      dt Panther ID
+      dd = @student.panther_id
       dt Phone
       dd = number_to_phone @student.phone
       dt Entered
@@ -45,6 +47,27 @@ h3 = "#{@student.degree} student"
           span.label.label-success Discussion Completed
         - else
           span.label.label-important Discussion Not Completed
+      dt.breathing-room Qualifying Exams
+      dd.breathing-room
+        - if @student.qualifier.em
+          span.label.label-success Electricity and Magnetism
+        - else
+          span.label.label-important E&M Not Completed
+      dd 
+        - if @student.qualifier.stat_mech
+          span.label.label-success Statistical Mechanics
+        - else
+          span.label.label-important Stat. Mech. Not Completed
+      dd 
+        - if @student.qualifier.class_mech
+          span.label.label-success Classical Mechanics
+        - else
+          span.label.label-important Class. Mech. Not Completed
+      dd 
+        - if @student.qualifier.quantum
+          span.label.label-success Quantum Mechanics
+        - else
+          span.label.label-important Quantum Mech. Not Completed
 .row
   .span4
     dl.dl-horizontal

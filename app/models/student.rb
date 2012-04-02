@@ -1,17 +1,15 @@
 class Student < ActiveRecord::Base
+  has_one :qualifier
   has_many :committees, dependent: :destroy
   has_many :professors, through: :committees
   accepts_nested_attributes_for :committees, allow_destroy: true
+  accepts_nested_attributes_for :qualifier
   validates_associated :committees
   validates_presence_of :first_name, :last_name, :degree
   validate :left_early_or_graduated
   
   def full_name
     "#{self.first_name} #{self.last_name}"
-  end
-
-  def formatted_panther_id
-    "#{panther_id.to_s[(0..2)]}-#{panther_id.to_s[(3..4)]}-#{panther_id.to_s[(5..8)]}"
   end
   
   def committee(options = {})
@@ -42,6 +40,17 @@ class Student < ActiveRecord::Base
   
   def self.past_students
     self.where('status != ?', "Current student")
+  end
+  
+  def build_default_qualifier
+    self.build_qualifier do |t|
+      t.em = false
+      t.stat_mech = false
+      t.class_mech = false
+      t.quantum = false
+      t.attempts = 0
+      t.student_id = self.id
+    end
   end
   
   private
