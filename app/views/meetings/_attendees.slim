@@ -1,0 +1,12 @@
+table.table
+  thead
+    tr
+      th Name
+      th
+  tbody#committee
+    = hidden_field_tag "meeting[student_ids][]", nil
+    - students.order('last_name').each do |student|
+      tr.fields
+        td
+          = check_box_tag "meeting[student_ids][]", student.id, @meeting.students.include?(student), id: dom_id(student)
+          = label_tag dom_id(student), student.full_name, class: "inline"

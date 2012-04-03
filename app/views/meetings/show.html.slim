@@ -3,8 +3,8 @@ h2 = display_date(@meeting.date)
 dl.dl-horizontal
   dt Notes
   dd = @meeting.notes || "(None)"
-  dt Attendees (#{@meeting.students.count})
-  - @meeting.students.each do |student|
+  dt.breathing-room Attendees (#{@meeting.students.count})
+  - @meeting.students.order('last_name').each do |student|
     dd = link_to student.full_name, student
 
 

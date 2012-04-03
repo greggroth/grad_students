@@ -4,23 +4,17 @@
     = f.datetime_select :date, { ampm: true }, { class: "datetime_select" }
     = f.input :notes
   = f.inputs "Attendees" do
-    table.table
-      thead
-        tr
-          th Name
-          th
-      tbody#committee
-        - Student.current_students.order('last_name').each do |student|
-          tr.fields
-            td
-              = check_box_tag "meeting[student_ids][]", student.id, @meeting.students.include?(student)
-              = student.full_name
-          
-        / = f.fields_for :students do |fs|
-        /   tr.fields
-        /     td = fs.text_field :id
-            / td = fs.input :student, as: :select, collection: Student.order('last_name'), label: false, input_html: {class: "narrow"}
-            / td = fs.link_to_remove "X"
+    .tabbable
+      ul.nav.nav-tabs
+        li.active
+          a href="#1" data-toggle="tab" Current Students
+        li
+          a href="#2" data-toggle="tab" Past Students
+      .tab-content
+        .tab-pane.active#1
+          = render "attendees", students: Student.current_students
+        .tab-page#2
+          = render "attendees", students: Student.past_students
     .form-actions
       = f.submit "Submit", class: "btn btn-primary"
       = link_to "Cancel", meetings_path, class: "btn btn-cancel"

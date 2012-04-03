@@ -72,10 +72,7 @@ namespace :import do
     doc["dataroot"]["StudentMeetings"].each do |student_meeting|
       meeting = Meeting.find_by_legacy_id(student_meeting["MeetingID"])
       student = Student.find_by_legacy_id(student_meeting["StudentID"])
-      if student_meeting["Attended"] == "1"
-        student.meetings << meeting
-        student.save
-      end
+      MeetingAttendance.create( student_id: student.id, meeting_id: meeting.id )
       puts "Added a meeting (id: #{meeting.id}) for student (id: #{student.id})"
     end  
   end
