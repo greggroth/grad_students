@@ -13,16 +13,24 @@ module ApplicationHelper
   end
 
   def formatted_degree(student)
-    if @student.degree == "MS" && @student.thesis_ms
+    if student.degree == "Masters" && student.thesis_ms
       "Masters student"
-    elsif @student.degree == "MS" && !@student.thesis_ms
+    elsif student.degree == "Masters" && !student.thesis_ms
       "Non-thesis Masters student"
-    elsif @student.degree == "PhD"
+    elsif student.degree == "PhD"
       "PhD Student"
     end
   end
   
   def display_date(date)
     date.strftime("%B %d %Y at %l:%M%p")
+  end
+  
+  def ok_or_not_ok(truthy)
+    if truthy
+      "<i class='icon-ok' />"
+    else
+      "<i class='icon-remove' />"
+    end
   end
 end

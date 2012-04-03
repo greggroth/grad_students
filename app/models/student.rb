@@ -12,6 +12,7 @@ class Student < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :degree
   validate :left_early_or_graduated
   validates_uniqueness_of :last_name, scope: :first_name
+  validates_format_of :panther_id, with: /\d\d\d\-\d\d\-\d\d\d\d/, allow_nil: true
   
   after_create :check_for_qualifier
   
@@ -20,7 +21,6 @@ class Student < ActiveRecord::Base
   end
   
   def committee(options = {})
-    # puts options.has_key? :ms
     case options
     when :ms
       professors.where('ms = true')
@@ -41,12 +41,35 @@ class Student < ActiveRecord::Base
     degree == "PhD"
   end
   
+  def ms_student?
+    degree == "Masters"
+  end
+  
   def self.current_students
     self.where('status = ?', "Current student")
   end
   
   def self.past_students
     self.where('status != ?', "Current student")
+  end
+  
+  def self.incomplete_qual
+    self.joins(:qualifier).where('degree = ? AND (qualifiers.em = false OR qualifiers.quantum = false OR qualifiers.stat_mech = false OR qualifiers.class_mech = false)', "PhD")
+  end
+  
+  def self.incomplete_research(options={})
+    case options
+    when :ms
+      self.where('degree = ? AND alt_research_1 = ?', 'Masters', '')
+    when :phd
+      self.where('degree = ? AND (alt_research_1 = ? OR alt_research_2 = ?)', 'PhD', '','')
+    else
+      self.incomplete_research(:ms) + self.incomplete_research(:phd)
+    end
+  end
+  
+  def self.incomplete_citi
+    self.where('citi_online = false OR citi_discussion = false')
   end
   
   def build_default_qualifier

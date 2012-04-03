@@ -65,12 +65,18 @@ html lang="en"
           .span3
             .well.sidebar-nav        
               - if content_for?(:sidebar)
+                h3 Reports
                 ul.nav.nav-list
                   = yield(:sidebar)
               - else
-                h3 Related Links
-                ul.nav.nav-list
-                  li = link_to "Physics Department Website", "http://www.phy-astr.gsu.edu/"
+                h3 Students Reports
+                ul 
+                  li = link_to "Unsatisfied qualifing exams", controller: :students, action: :incomplete_qualifier
+                  li = link_to "Unsatisfied alternate research skills", controller: :students, action: :incomplete_research
+                  li = link_to "Incomplete CITI training", controller: :students, action: :incomplete_citi
+                h3 Professor Reports
+                ul
+                  li = link_to "Committees by professor", controller: :professors, action: :committees
     
       footer
         p &copy; 2012 Georgia State University Department of Physics and Astronomy

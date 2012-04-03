@@ -1,0 +1,16 @@
+table.table
+  thead
+    tr
+      th Name
+      th E-mail
+      th Degree
+      th Alternate Research 1
+      th Alternate Research 2
+  tbody
+    - students.each do |student|
+        tr
+          td = link_to student.full_name, student
+          td = mail_to student.email_1
+          td = student.degree
+          td = student.alt_research_1
+          td = student.ms_student? ? 'n/a' : student.alt_research_2

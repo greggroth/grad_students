@@ -13,7 +13,7 @@
       .tab-content
         .tab-pane.active#1
           = render "attendees", students: Student.current_students
-        .tab-page#2
+        .tab-pane#2
           = render "attendees", students: Student.past_students
     .form-actions
       = f.submit "Submit", class: "btn btn-primary"

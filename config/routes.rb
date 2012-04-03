@@ -2,12 +2,18 @@ GradStudents::Application.routes.draw do
   devise_for :professors
 
   root to: "students#index"
+  
+  match 'students/incomplete_qualifier' => 'students#incomplete_qualifier'
+  match 'students/incomplete_research' => 'students#incomplete_research'
+  match 'students/incomplete_citi' => 'students#incomplete_citi'
+  
+  match 'professors/committees' => 'professors#committees'
 
   resources :professors
   resources :students
   resources :meetings
   
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

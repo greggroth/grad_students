@@ -81,4 +81,8 @@ class ProfessorsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def committees
+    @professors = Professor.includes(:students,:committees).order('last_name')
+  end
 end

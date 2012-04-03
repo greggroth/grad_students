@@ -1,0 +1,20 @@
+h1 List of Students with incomplete Qualifying Exams
+table.table
+  thead
+    tr
+      th Name
+      th E-mail
+      th.check E&M
+      th.check Quantum
+      th.check Statistical
+      th.check Classical
+  tbody
+    - @students.each do |student|
+        tr
+          td = link_to student.full_name, student
+          td = mail_to student.email_1
+          td == ok_or_not_ok(student.qualifier.em)
+          td == ok_or_not_ok(student.qualifier.quantum)
+          td == ok_or_not_ok(student.qualifier.stat_mech)
+          td == ok_or_not_ok(student.qualifier.class_mech)
+          

@@ -85,4 +85,16 @@ class StudentsController < ApplicationController
     end
   end
 
+  def incomplete_qualifier
+    @students = Student.incomplete_qual.order('last_name')
+  end
+  
+  def incomplete_research
+    @ms_students = Student.incomplete_research(:ms).order('last_name')
+    @phd_students = Student.incomplete_research(:phd).order('last_name')
+  end
+  
+  def incomplete_citi
+    @students = Student.current_students.incomplete_citi.order('last_name')
+  end
 end

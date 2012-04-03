@@ -1,0 +1,21 @@
+h1 Professors and who they committee
+table.table
+  thead
+  tbody
+    - @professors.each do |professor|
+      tr
+        td = link_to professor.full_name, professor
+        td
+          - unless professor.committees.empty?
+            table.table.table-bordered
+              thead
+                tr
+                  th Name
+                  th MS
+                  th PhD
+              tbody
+                - professor.committees.includes(:student).order('students.last_name').each do |committee|
+                  tr
+                    td = link_to committee.student.full_name, committee.student
+                    td.check == committee.ms_chair ? "Chair" : ok_or_not_ok(committee.ms)
+                    td.check == committee.phd_chair ? "Chair" : ok_or_not_ok(committee.phd)

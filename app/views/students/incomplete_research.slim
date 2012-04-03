@@ -1,0 +1,13 @@
+h1 List of Students with incomplete Alternate Research Skills
+
+.tabbable
+  ul.nav.nav-tabs
+    li.active
+      a href="#1" data-toggle="tab" PhD Students
+    li
+      a href="#2" data-toggle="tab" Masters Students
+  .tab-content
+    .tab-pane.active#1
+      = render "incomplete_research_table", students: @phd_students
+    .tab-pane#2
+      = render "incomplete_research_table", students: @ms_students
