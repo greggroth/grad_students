@@ -14,7 +14,8 @@ class ProfessorsController < ApplicationController
   # GET /professors/1.json
   def show
     @professor = Professor.find(params[:id])
-    @current_students = @professor.current_committees.order('students.last_name')
+    @current_committees = @professor.current_committees.order('students.last_name')
+    @past_committees = @professor.past_committees.order('students.last_name')
     
     respond_to do |format|
       format.html # show.html.erb

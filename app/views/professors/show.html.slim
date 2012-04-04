@@ -1,25 +1,19 @@
 h1 = @professor.full_name
 p = mail_to @professor.email
 
-h2 Current Student Committees
-table.table.table-striped
-  thead
-    tr
-      th Name
-      th E-mail
-      th MS/PhD
-      th
-  tbody
-    - @current_students.each do |committee|
-      tr
-        td = link_to committee.student.full_name, committee.student
-        td = mail_to committee.student.email_1
-        td = committee_type(committee)
-        td
-          - if @professor.chaired?(committee.student)
-            span.label Chair
-        
-      
+h2 Student Committees
+
+.tabbable
+  ul.nav.nav-tabs
+    li.active
+      a href="#1" data-toggle="tab" Current Students
+    li
+      a href="#2" data-toggle="tab" Past Students
+  .tab-content
+    .tab-pane.active#1
+      = render "committees", {committees: @current_committees, professor: @professor}
+    .tab-pane#2
+      = render "committees", {committees: @past_committees, professor: @professor}
 
 = link_to 'Edit ', edit_professor_path(@professor)
 '|

@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  
   # GET /students
   # GET /students.json
   def index    
@@ -97,4 +98,5 @@ class StudentsController < ApplicationController
   def incomplete_citi
     @students = Student.current_students.incomplete_citi.order('last_name')
   end
+
 end

@@ -1,0 +1,16 @@
+table.table.table-striped
+  thead
+    tr
+      th Name
+      th E-mail
+      th MS/PhD
+      th
+  tbody
+    - committees.each do |committee|
+      tr
+        td = link_to committee.student.full_name, committee.student
+        td = mail_to committee.student.email_1
+        td = committee_type(committee)
+        td
+          - if professor.chaired?(committee.student)
+            span.label Chair
