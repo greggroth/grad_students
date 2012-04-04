@@ -30,3 +30,17 @@ form.formtastic fieldset > ol > li.check_boxes fieldset ol li {
 .tabbable {
   padding-top: 10px;
 }
+
+@media print {
+  .hide-from-pdf {
+    display: none;
+  }
+  
+  .form-actions {
+    display: none;
+  }
+  
+  a {
+    color: black;
+  }
+}

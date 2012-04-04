@@ -1,5 +1,5 @@
 h1 List of Students with incomplete Alternate Research Skills
-p = mail_to (@phd_students + @ms_students).map(&:email_1).delete_if(&:nil?).join(','), "E-mail these students"
+p.hide-from-pdf = mail_to (@phd_students + @ms_students).map(&:email_1).delete_if(&:nil?).join(','), "E-mail these students"
 .tabbable
   ul.nav.nav-tabs
     li.active

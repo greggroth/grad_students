@@ -15,6 +15,6 @@ h2 Student Committees
     .tab-pane#2
       = render "committees", {committees: @past_committees, professor: @professor}
 
-= link_to 'Edit ', edit_professor_path(@professor)
+= link_to 'Edit ', edit_professor_path(@professor), class: 'hide-from-pdf'
 '|
-= link_to 'Back', professors_path
+= link_to 'Back', professors_path, class: 'hide-from-pdf'

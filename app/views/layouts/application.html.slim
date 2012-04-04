@@ -15,14 +15,14 @@ html lang="en"
       }
     = stylesheet_link_tag "application", :media => "all"
     / Le fav and touch icons
-    link href="images/favicon.ico" rel="shortcut icon"
+    / link href="images/favicon.ico" rel="shortcut icon"
     link href="images/apple-touch-icon.png" rel="apple-touch-icon"
     link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72"
     link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114"
 
 
   body
-    .navbar.navbar-fixed-top
+    .navbar.navbar-fixed-top.hide-from-pdf
       .navbar-inner
         .container
           a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
@@ -42,8 +42,20 @@ html lang="en"
                   li= link_to "New Student", new_student_path
               li= link_to "Faculty", professors_path
               li= link_to "Meetings", meetings_path
+              li.dropdown
+                a.dropdown-toggle href="#" data-toggle="dropdown"
+                  | Reports
+                  b.caret
+                ul.dropdown-menu
+                  li.nav-header Students
+                  li= link_to "Unsatisfied Qualifying Exams", students_incomplete_qualifier_path
+                  li= link_to "Unsatisfied Alternate Research", students_incomplete_research_path
+                  li= link_to "Incomplete CITI Training", students_incomplete_citi_path
+                  li.divider
+                  li.nav-header Professors
+                  li= link_to "Committees by Professor", professors_committees_path
     - if professor_signed_in?
-      li.nav-right == "Welcome, #{current_professor.full_name} (#{link_to('logout', destroy_professor_session_path, :method => :delete)} or #{link_to('change password', edit_professor_registration_path)})"
+      li.nav-right.hide-from-pdf == "Welcome, #{current_professor.full_name} (#{link_to('logout', destroy_professor_session_path, :method => :delete)} or #{link_to('change password', edit_professor_registration_path)})"
     .container
       - if flash[:alert]
         .row
@@ -64,24 +76,19 @@ html lang="en"
           .span1 &nbsp;
           .span3
             - if professor_signed_in?
-              .well.sidebar-nav        
+              .well.sidebar-nav.hide-from-pdf    
                 - if content_for?(:sidebar)
                   h3 Reports
                   ul.nav.nav-list
                     = yield(:sidebar)
                 - else
-                  h3 Students Reports
-                  ul 
-                    li = link_to "Unsatisfied qualifing exams", controller: :students, action: :incomplete_qualifier
-                    li = link_to "Unsatisfied alternate research skills", controller: :students, action: :incomplete_research
-                    li = link_to "Incomplete CITI training", controller: :students, action: :incomplete_citi
-                  h3 Professor Reports
-                  ul
-                    li = link_to "Committees by professor", controller: :professors, action: :committees
+                  / h3 Printout
+                  ul.unstyled
+                    li = link_to "Printer friendly version (pdf)", url_for( format: 'pdf' )
     
       footer
         p &copy; 2012 Georgia State University Department of Physics and Astronomy
-        p = link_to "Fork me on GitHub", "https://github.com/greggroth/grad_students"
+        p.hide-from-pdf = link_to "Fork me on GitHub", "https://github.com/greggroth/grad_students"
     /!
       Le javascript
       \==================================================

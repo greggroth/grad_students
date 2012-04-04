@@ -1,5 +1,5 @@
 h1 List of Students with incomplete Qualifying Exams
-p = mail_to @students.map(&:email_1).delete_if(&:nil?).join(','), "E-mail these students"
+p.hide-from-pdf = mail_to @students.map(&:email_1).delete_if(&:nil?).join(','), "E-mail these students"
 table.table
   thead
     tr
