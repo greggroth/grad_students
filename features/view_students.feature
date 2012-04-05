@@ -1,5 +1,5 @@
 Feature: View Students
-  In order to manage students
+  In order to view students
   As a professor
   I should be able to view students
   

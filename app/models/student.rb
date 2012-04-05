@@ -5,13 +5,13 @@ class Student < ActiveRecord::Base
   # has_and_belongs_to_many :meetings, uniq: true
   has_many :meeting_attendances
   has_many :meetings, through: :meeting_attendances
-  accepts_nested_attributes_for :committees, allow_destroy: true
+  accepts_nested_attributes_for :committees, allow_destroy: true, reject_if: proc { |a| a['professor_id'].blank? }
   accepts_nested_attributes_for :qualifier
   
   validates_associated :committees
   validates_presence_of :first_name, :last_name, :degree
   validates_uniqueness_of :last_name, scope: :first_name
-  validates_format_of :panther_id, with: /\d\d\d\-\d\d\-\d\d\d\d/, allow_nil: true
+  validates_format_of :panther_id, with: /\d\d\d\-\d\d\-\d\d\d\d/, allow_nil: true, allow_blank: true
   
   before_create :check_for_qualifier
   

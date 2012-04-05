@@ -59,3 +59,11 @@ When /^I go to the page for the student (.+)$/ do |student|
   last_name = student.split(' ')[1]
   visit student_path(Student.find_by_last_name(last_name))
 end
+
+When /^I click button "([^"]*)"$/ do |button_name|
+  click_button button_name
+end
+
+When /^I fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
+  fill_in field, with: value
+end
