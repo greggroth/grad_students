@@ -23,7 +23,7 @@ module ApplicationHelper
   end
   
   def display_date(date)
-    date.strftime("%B %d %Y at %l:%M%p")
+    date.strftime("%B %e %Y at %l:%M%p")
   end
   
   def ok_or_not_ok(truthy)
