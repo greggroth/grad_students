@@ -11,8 +11,7 @@ Feature: View Students
   
   Scenario: Students List
     Given I have students named John Smith, Cindy Lu
-    And a professor "smart_guy@gsu.edu" has an account
-    And he is logged in
+    And a professor "smart_guy@gsu.edu" is logged in
     When I am on the students page
     Then I should see "John Smith"
     And I should see "Cindy Lu"
