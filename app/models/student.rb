@@ -10,11 +10,10 @@ class Student < ActiveRecord::Base
   
   validates_associated :committees
   validates_presence_of :first_name, :last_name, :degree
-  validate :left_early_or_graduated
   validates_uniqueness_of :last_name, scope: :first_name
   validates_format_of :panther_id, with: /\d\d\d\-\d\d\-\d\d\d\d/, allow_nil: true
   
-  after_create :check_for_qualifier
+  before_create :check_for_qualifier
   
   def full_name
     "#{self.first_name} #{self.last_name}"
@@ -84,13 +83,7 @@ class Student < ActiveRecord::Base
   end
   
   private
-  def left_early_or_graduated
-    if left_program_early && graduated
-      errors[:base] <<  "can not be set as left early and graduated"
-    end
-  end
-  
-  def check_for_qualifiers
+  def check_for_qualifier
     if qualifier.nil?
       build_qualifier
     end

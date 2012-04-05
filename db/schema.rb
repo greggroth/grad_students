@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403151414) do
+ActiveRecord::Schema.define(:version => 20120405142710) do
 
   create_table "committees", :force => true do |t|
     t.integer  "student_id"
@@ -61,13 +61,13 @@ ActiveRecord::Schema.define(:version => 20120403151414) do
   add_index "professors", ["reset_password_token"], :name => "index_professors_on_reset_password_token", :unique => true
 
   create_table "qualifiers", :force => true do |t|
-    t.boolean  "class_mech"
-    t.boolean  "stat_mech"
-    t.boolean  "em"
-    t.boolean  "quantum"
-    t.integer  "attempts"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "class_mech", :default => false, :null => false
+    t.boolean  "stat_mech",  :default => false, :null => false
+    t.boolean  "em",         :default => false, :null => false
+    t.boolean  "quantum",    :default => false, :null => false
+    t.integer  "attempts",   :default => 1
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "student_id"
   end
 
@@ -86,18 +86,16 @@ ActiveRecord::Schema.define(:version => 20120403151414) do
     t.string   "semester_left"
     t.boolean  "citi_online"
     t.boolean  "citi_discussion"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
     t.string   "email_1"
     t.string   "email_2"
-    t.string   "phone",              :limit => 10
+    t.string   "phone",           :limit => 10
     t.integer  "legacy_id"
-    t.boolean  "left_program_early"
-    t.boolean  "graduated"
-    t.string   "lab_phone",          :limit => 10
+    t.string   "lab_phone",       :limit => 10
     t.boolean  "thesis_ms"
-    t.string   "degree"
-    t.string   "status"
+    t.string   "degree",                        :default => "PhD"
+    t.string   "status",                        :default => "Current student"
   end
 
 end

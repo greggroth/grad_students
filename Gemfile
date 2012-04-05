@@ -37,6 +37,7 @@ group :development do
 end
 
 group :test do
+  gem 'launchy'
   gem 'cucumber-rails'
   gem 'database_cleaner'
 end

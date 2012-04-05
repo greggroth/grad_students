@@ -5,7 +5,7 @@ class Professor < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me
   has_many :committees, dependent: :destroy
   has_many :students, through: :committees
   validates_presence_of :first_name, :last_name

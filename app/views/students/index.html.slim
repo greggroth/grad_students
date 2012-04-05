@@ -12,7 +12,7 @@ table.table.table-striped
       tr
         td 
           = link_to student.full_name, student_path(student)
-          - if student.left_program_early
+          - if student.status == "Left program early"
             span.label.label-warning Left Early
         td = mail_to student.email_1
         td.hide-from-pdf = link_to "Edit", edit_student_path(student)
