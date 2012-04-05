@@ -6,6 +6,7 @@ dl.dl-horizontal
   dt.breathing-room Attendees (#{@meeting.students.count})
   - @meeting.students.order('last_name').each do |student|
     dd = link_to student.full_name, student
+  dd
 
 
 .form-actions

@@ -11,6 +11,9 @@ class Professor < ActiveRecord::Base
   validates_presence_of :first_name, :last_name
   validates_associated :committees
 
+  def to_param
+    "#{id} #{full_name}".parameterize
+  end
 
   def full_name
     "#{self.first_name} #{self.last_name}"

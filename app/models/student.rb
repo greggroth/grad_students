@@ -15,6 +15,10 @@ class Student < ActiveRecord::Base
   
   before_create :check_for_qualifier
   
+  def to_param
+    "#{id} #{full_name}".parameterize
+  end
+  
   def full_name
     "#{self.first_name} #{self.last_name}"
   end

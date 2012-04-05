@@ -33,4 +33,11 @@ module ApplicationHelper
       "<i class='icon-remove' />"
     end
   end
+  
+  def clean_params(params)
+    params.delete("controller")
+    params.delete("action")
+    params.delete("id")
+    params
+  end
 end

@@ -84,7 +84,7 @@ html lang="en"
                 - else
                   / h3 Printout
                   ul.unstyled
-                    li = link_to "Printer friendly version (pdf)", url_for( format: 'pdf' )
+                    li = link_to "Printer friendly version (pdf)", url_for( format: 'pdf', params: clean_params(params) )
     
       footer
         p &copy; 2012 Georgia State University Department of Physics and Astronomy

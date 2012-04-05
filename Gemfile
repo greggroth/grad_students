@@ -48,6 +48,7 @@ gem 'nested_form', git: 'git://github.com/ritchiey/nested_form.git'
 gem 'pdfkit'
 gem 'foreman'
 gem 'unicorn'
+gem 'heroku'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
