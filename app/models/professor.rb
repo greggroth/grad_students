@@ -29,11 +29,11 @@ class Professor < ActiveRecord::Base
   end
   
   def current_committees
-    committees.joins(:student).where("students.graduated = false AND students.left_program_early = false")
+    committees.joins(:student).where("students.status = ?", "Current student")
   end
   
   def past_committees
-    committees.joins(:student).where("students.graduated = true OR students.left_program_early = true")
+    committees.joins(:student).where("students.status != ?", "Current student")
   end
   
 end
