@@ -56,7 +56,7 @@ GradStudents::Application.configure do
   ActionMailer::Base.smtp_settings = {
       :address        => 'smtp.gmail.com', # default: localhost
       :port           => '587',                  # default: 25
-      :domain         => 'gmail.com'
+      :domain         => 'gmail.com',
       :user_name      => 'gsuphysicsgrad@gmail.com',
       :password       => ENV['GMAIL_PASSWORD'],
       :authentication => :plain                 # :plain, :login or :cram_md5
