@@ -14,7 +14,19 @@ GradStudents::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  
+  # Host settings for dev mode
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  
+  ActionMailer::Base.smtp_settings = {
+      :address        => 'smtp.gmail.com', # default: localhost
+      :port           => '587',                  # default: 25
+      :domain         => 'gmail.com',
+      :user_name      => 'gsuphysicsgrad@gmail.com',
+      :password       => ENV['GMAIL_PASSWORD'],
+      :authentication => :plain                 # :plain, :login or :cram_md5
+    }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

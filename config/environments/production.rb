@@ -50,6 +50,17 @@ GradStudents::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  
+  # Gmail Settings
+  config.action_mailer.default_url_options = { :host => 'gmail.com' }   
+  ActionMailer::Base.smtp_settings = {
+      :address        => 'smtp.gmail.com', # default: localhost
+      :port           => '587',                  # default: 25
+      :domain         => 'gmail.com'
+      :user_name      => 'gsuphysicsgrad@gmail.com',
+      :password       => ENV['GMAIL_PASSWORD'],
+      :authentication => :plain                 # :plain, :login or :cram_md5
+    }
 
   # Enable threaded mode
   # config.threadsafe!
