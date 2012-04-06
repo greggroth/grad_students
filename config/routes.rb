@@ -1,6 +1,6 @@
 GradStudents::Application.routes.draw do
   devise_for :professors
-
+  
   root to: "students#index"
   
   match 'students/incomplete_qualifier' => 'students#incomplete_qualifier'
