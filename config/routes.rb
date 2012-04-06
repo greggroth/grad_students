@@ -8,7 +8,6 @@ GradStudents::Application.routes.draw do
   match 'students/incomplete_citi' => 'students#incomplete_citi'
   
   match 'professors/committees' => 'professors#committees'
-
   resources :professors
   resources :students
   resources :meetings

@@ -6,7 +6,6 @@ class ProfessorsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @professors }
     end
   end
 
@@ -19,18 +18,17 @@ class ProfessorsController < ApplicationController
     
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @professor }
     end
   end
 
   # GET /professors/new
   # GET /professors/new.json
   def new
+    @password = (0...8).map{65.+(rand(25)).chr}.join
     @professor = Professor.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @professor }
     end
   end
 
@@ -47,10 +45,8 @@ class ProfessorsController < ApplicationController
     respond_to do |format|
       if @professor.save
         format.html { redirect_to @professor, notice: 'Professor was successfully created.' }
-        format.json { render json: @professor, status: :created, location: @professor }
       else
         format.html { render action: "new" }
-        format.json { render json: @professor.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -61,12 +57,10 @@ class ProfessorsController < ApplicationController
     @professor = Professor.find(params[:id])
 
     respond_to do |format|
-      if @professor.update_attributes(params[:professor])
+      if @professor.update_without_password(params[:professor])
         format.html { redirect_to @professor, notice: 'Professor was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @professor.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -79,7 +73,6 @@ class ProfessorsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to professors_url }
-      format.json { head :no_content }
     end
   end
   

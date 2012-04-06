@@ -73,6 +73,6 @@ h3 = formatted_degree(@student)
           dd = link_to member.full_name, member
 
 .form-actions
-  = link_to "Back", students_path, :class => 'btn'
+  = link_to "Back", :back, :class => 'btn'
   = link_to "Edit", edit_student_path(@student), :class => 'btn'
   = link_to "Delete", student_path(@student), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn'

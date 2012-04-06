@@ -17,4 +17,4 @@
           = render "attendees", students: Student.past_students
     .form-actions
       = f.submit "Submit", class: "btn btn-primary"
-      = link_to "Cancel", meetings_path, class: "btn btn-cancel"
+      = link_to "Cancel", :back, class: "btn btn-cancel"

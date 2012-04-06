@@ -55,7 +55,7 @@ html lang="en"
                   li.nav-header Professors
                   li= link_to "Committees by Professor", professors_committees_path
     - if professor_signed_in?
-      li.nav-right.hide-from-pdf == "Welcome, #{current_professor.full_name} (#{link_to('logout', destroy_professor_session_path, :method => :delete)} or #{link_to('change password', edit_professor_registration_path)})"
+      li.nav-right.hide-from-pdf == "Welcome, #{current_professor.full_name} (#{link_to('logout', destroy_professor_session_path, :method => :delete)} or #{link_to('change password', edit_professor_path(current_professor))})"
     .container
       - if flash[:alert]
         .row
