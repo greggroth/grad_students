@@ -42,6 +42,10 @@ group :test do
   gem 'database_cleaner'
 end
 
+group :production do
+  gem 'wkhtmltopdf-heroku'
+end
+
 gem 'jquery-rails'
 gem 'devise'
 gem 'nested_form', git: 'git://github.com/ritchiey/nested_form.git'
@@ -49,7 +53,6 @@ gem 'pdfkit'
 gem 'foreman'
 gem 'unicorn'
 gem 'heroku'
-gem 'wkhtmltopdf-heroku'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

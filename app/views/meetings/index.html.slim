@@ -12,7 +12,7 @@ table class="table table-striped"
       tr
         td = link_to display_date(meeting.date), meeting_path(meeting)
         td = meeting.students.count
-        td = truncate(meeting.notes, length: 100)
+        td = truncate(meeting.notes, length: 50)
         td
           ' #{link_to "Edit", edit_meeting_path(meeting)}
           ' #{link_to "Destroy", meeting_path(meeting), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}

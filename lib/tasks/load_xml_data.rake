@@ -1,9 +1,18 @@
 desc  "Import data to the database from an xml file"
 namespace :import do
   task :students, [:file_path] => [:environment] do |t, args|
+    # QualStatus:
+    #   1 - Needs to take
+    #   2 - Passed
+    #   3 - Retake one
+    #   4 - Retake two
+    # QualTest:
+    #   Incomplete Tests
+    
+    
     doc = Hash.from_xml(File.open(args[:file_path]))
     doc["dataroot"]["Students"].each do |student|
-      Student.create(
+      student = Student.create(
           first_name:           student["FirstName"],
           last_name:            student["LastName"],
           phone:                student["ContactNumber"].nil? ? nil : student["ContactNumber"].gsub(/[\(\)\s\-]/,""),
@@ -25,6 +34,26 @@ namespace :import do
           lab_phone:            student["LabPhone"].nil? ? nil : student["LabPhone"].gsub(/[\(\)\s\-]/,""),
           thesis_ms:            student["ThesisMS"]
         )
+        
+      # student.build_qualifiers
+      # 
+      # case student["QualStatus"]
+      # when "2"  # Passed everything
+      #   student.em = true
+      #   student.stat_mech = true
+      #   student.quantum = true
+      #   student.class_mech = true
+      #   student.attempts = 1
+      # when "3"
+      #   student.em = true
+      #   student.stat_mech = true
+      #   student.quantum = true
+      #   student.class_mech = true
+      #   student.attempts = 1
+      #   case student["QualTest"] # NEED TO CHECK HOW DR. P WROTE THESE
+      #   when ""
+      # when 
+        
     end
   end
   
