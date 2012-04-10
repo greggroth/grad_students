@@ -25,10 +25,9 @@ $(document).ready ->
   $('#student_degree').change (e) ->
     update_required_graduate_status_fields(e.target.value)
     
+  # Input Masks for Inputs
   $('#panther-id').inputmask('999-99-9999')
-  
-  
-
+  $('.phone-number').inputmask('999-999-9999')
       
   show_or_hide_finished_inputs()
   

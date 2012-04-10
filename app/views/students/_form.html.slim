@@ -11,6 +11,10 @@
     = f.input :first_name, required: true
     = f.input :last_name, required: true
     = f.input :panther_id, label: "Panther ID", input_html: { id: "panther-id"}
+    = f.input :email_2, label: "School E-mail"
+    = f.input :email_2, label: "Personal E-mail"
+    = f.input :lab_phone, label: "Lab Phone", input_html: { class: "phone-number" }
+    = f.input :phone, label: "Personal Phone", input_html: { class: "phone-number" }
   = f.inputs "Degree Information" do
     = f.input :degree, as: :select, collection: ["Masters", "PhD"], default: "PhD", prompt: true, required: true
     ul.unstyled.ms-only

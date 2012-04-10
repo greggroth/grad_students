@@ -8,12 +8,14 @@ h3 = formatted_degree(@student)
 .row
   .span4
     dl.dl-horizontal
-      dt Email
+      dt E-mail
       dd = mail_to @student.email_1
       dd = mail_to @student.email_2
       dt Panther ID
       dd = @student.panther_id
-      dt Phone
+      dt Lab Phone
+      dd = number_to_phone @student.lab_phone
+      dt Personal Phone
       dd = number_to_phone @student.phone
       dt Entered
       dd = @student.year_entered
