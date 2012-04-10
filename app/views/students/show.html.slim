@@ -73,6 +73,11 @@ h3 = formatted_degree(@student)
             span.label Chair
         - @student.committee(:phd_members).each do |member|
           dd = link_to member.full_name, member
+.row
+  .span8
+    dl.dl-horizontal
+      dt Notes
+      dd = @student.notes
 
 .form-actions
   = link_to "Back", :back, :class => 'btn'

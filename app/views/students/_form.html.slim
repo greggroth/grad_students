@@ -15,6 +15,7 @@
     = f.input :email_2, label: "Personal E-mail"
     = f.input :lab_phone, label: "Lab Phone", input_html: { class: "phone-number" }
     = f.input :phone, label: "Personal Phone", input_html: { class: "phone-number" }
+    = f.input :notes
   = f.inputs "Degree Information" do
     = f.input :degree, as: :select, collection: ["Masters", "PhD"], default: "PhD", prompt: true, required: true
     ul.unstyled.ms-only

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405142710) do
+ActiveRecord::Schema.define(:version => 20120410195333) do
 
   create_table "committees", :force => true do |t|
     t.integer  "student_id"
@@ -86,16 +86,17 @@ ActiveRecord::Schema.define(:version => 20120405142710) do
     t.string   "semester_left"
     t.boolean  "citi_online"
     t.boolean  "citi_discussion"
-    t.datetime "created_at",                                                   :null => false
-    t.datetime "updated_at",                                                   :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.string   "email_1"
     t.string   "email_2"
-    t.string   "phone",           :limit => 10
+    t.string   "phone"
     t.integer  "legacy_id"
-    t.string   "lab_phone",       :limit => 10
+    t.string   "lab_phone"
     t.boolean  "thesis_ms"
-    t.string   "degree",                        :default => "PhD"
-    t.string   "status",                        :default => "Current student"
+    t.string   "degree",          :default => "PhD"
+    t.string   "status",          :default => "Current student"
+    t.text     "notes"
   end
 
 end
