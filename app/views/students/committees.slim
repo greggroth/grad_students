@@ -1,0 +1,10 @@
+h1 Students and their committees
+table.table
+  thead
+  tbody
+    - @students.each do |student|
+      tr
+        td = link_to student.full_name, student
+        td
+          - unless student.committees.empty?
+            = render "committees", student: student

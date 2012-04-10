@@ -1,0 +1,33 @@
+table.table.table-bordered.table-condensed
+  thead
+    tr
+      th Master Committee
+      th PhD Committee
+  tbody
+    tr
+      td.halfies
+        table.table-condensed.nested-table
+          - student.committees.select(&:ms_chair).map(&:professor).each do |chair|
+            tr
+              td
+                = link_to chair.full_name, chair
+                span.label Chair
+          - student.committees.select(&:ms).map(&:professor).each do |member|
+            tr
+              td
+                = link_to member.full_name, member
+      td.halfies
+        table.table-condensed.nested-table   
+          - if student.phd_student?
+              - student.committees.select(&:phd_chair).map(&:professor).each do |chair|
+                tr
+                  td
+                    = link_to chair.full_name, chair
+                    span.label Chair
+              - student.committees.select(&:phd).map(&:professor).each do |member|
+                tr
+                  td
+                    = link_to member.full_name, member
+          - else
+            tr
+              td N/A

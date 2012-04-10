@@ -98,5 +98,9 @@ class StudentsController < ApplicationController
   def incomplete_citi
     @students = Student.current_students.incomplete_citi.order('last_name')
   end
+  
+  def committees
+    @students = Student.includes(:committees, :professors).order('last_name')
+  end
 
 end
