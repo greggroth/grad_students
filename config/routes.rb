@@ -6,7 +6,7 @@ GradStudents::Application.routes.draw do
   match 'students/incomplete_qualifier' => 'students#incomplete_qualifier'
   match 'students/incomplete_research' => 'students#incomplete_research'
   match 'students/incomplete_citi' => 'students#incomplete_citi'
-  
+  match 'students/committees' => 'students#committees'
   match 'professors/committees' => 'professors#committees'
   resources :professors
   resources :students
