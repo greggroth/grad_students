@@ -86,6 +86,20 @@ class Student < ActiveRecord::Base
     end
   end
   
+  def tests_passed
+    # This doesn't feel right, but I don't have an alternative
+    Qualifier.where(student_id: id)
+             .select([:em, :stat_mech, :quantum, :class_mech, :biophysics, :astrophysics])
+             .collect { |t| [t.em, t.stat_mech, t.quantum, t.class_mech, t.biophysics, t.astrophysics] }
+             .first
+             .keep_if { |t| t }
+             .count
+  end
+  
+  def passed_qualifier?
+    tests_passed >= 4
+  end
+  
   private
   def check_for_qualifier
     if qualifier.nil?

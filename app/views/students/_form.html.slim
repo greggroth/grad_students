@@ -82,13 +82,13 @@
         = f.semantic_fields_for :committees
   = f.link_to_add "Add a member", :committees, container: 'tbody#committee', fields_element: 'tr'
   = f.inputs 'Qualifying Exam' do
-    table.table
-      thead
-        tr
-          th Exam
-          th Finished
-      tbody
-        = f.fields_for :qualifier do |qf|
+    = f.fields_for :qualifier do |qf|
+      table.table
+        thead
+          tr
+            th Exam
+            th Finished
+        tbody
           tr
             td = qf.label :em, "Electricity and Magnetism"
             td = qf.check_box :em
@@ -101,7 +101,12 @@
           tr
             td = qf.label :class_mech, "Classical Mechanics"
             td = qf.check_box :class_mech
-            
+          tr
+            td = qf.label :biophysics, "Biophysics"
+            td = qf.check_box :biophysics
+          tr
+            td = qf.label :astrophysics, "Astrophysics"
+            td = qf.check_box :astrophysics
   .form-actions
     = f.submit "Submit", class: "btn btn-primary"
     = link_to "Cancel", :back, class: "btn btn-cancel"

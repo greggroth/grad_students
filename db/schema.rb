@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410195333) do
+ActiveRecord::Schema.define(:version => 20120410200918) do
 
   create_table "committees", :force => true do |t|
     t.integer  "student_id"
@@ -61,14 +61,16 @@ ActiveRecord::Schema.define(:version => 20120410195333) do
   add_index "professors", ["reset_password_token"], :name => "index_professors_on_reset_password_token", :unique => true
 
   create_table "qualifiers", :force => true do |t|
-    t.boolean  "class_mech", :default => false, :null => false
-    t.boolean  "stat_mech",  :default => false, :null => false
-    t.boolean  "em",         :default => false, :null => false
-    t.boolean  "quantum",    :default => false, :null => false
-    t.integer  "attempts",   :default => 1
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.boolean  "class_mech",   :default => false, :null => false
+    t.boolean  "stat_mech",    :default => false, :null => false
+    t.boolean  "em",           :default => false, :null => false
+    t.boolean  "quantum",      :default => false, :null => false
+    t.integer  "attempts",     :default => 1
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "student_id"
+    t.boolean  "biophysics"
+    t.boolean  "astrophysics"
   end
 
   create_table "students", :force => true do |t|

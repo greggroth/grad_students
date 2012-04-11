@@ -1,21 +1,63 @@
 dt.breathing-room Qualifying Exams
-dd
-  - if student.qualifier.em
-    span.label.label-success Electricity and Magnetism
-  - else
-    span.label.label-important E&M Not Completed
-dd 
-  - if student.qualifier.stat_mech
-    span.label.label-success Statistical Mechanics
-  - else
-    span.label.label-important Stat. Mech. Not Completed
-dd 
-  - if student.qualifier.class_mech
-    span.label.label-success Classical Mechanics
-  - else
-    span.label.label-important Class. Mech. Not Completed
-dd 
-  - if student.qualifier.quantum
-    span.label.label-success Quantum Mechanics
-  - else
-    span.label.label-important Quantum Mech. Not Completed
+- if student.passed_qualifier?
+  dd
+    - if student.qualifier.em
+      span.label.label-success Electricity and Magnetism
+    - else
+      span.label E&M not completed
+  dd 
+    - if student.qualifier.stat_mech
+      span.label.label-success Statistical Mechanics
+    - else
+      span.label Stat. Mech. not completed
+  dd 
+    - if student.qualifier.class_mech
+      span.label.label-success Classical Mechanics
+    - else
+      span.label Class. Mech. not completed
+  dd 
+    - if student.qualifier.quantum
+      span.label.label-success Quantum Mechanics
+    - else
+      span.label Quantum Mech. not completed
+  dd 
+    - if student.qualifier.astrophysics
+      span.label.label-success Astrophysics
+    - else
+      span.label Astrophysics not completed
+  dd 
+    - if student.qualifier.biophysics
+      span.label.label-success Astrophysics
+    - else
+      span.label Biophysics not completed
+- else
+  dd
+    - if student.qualifier.em
+      span.label.label-success Electricity and Magnetism
+    - else
+      span.label.label-important E&M Not Completed
+  dd 
+    - if student.qualifier.stat_mech
+      span.label.label-success Statistical Mechanics
+    - else
+      span.label.label-important Stat. Mech. Not Completed
+  dd 
+    - if student.qualifier.class_mech
+      span.label.label-success Classical Mechanics
+    - else
+      span.label.label-important Class. Mech. Not Completed
+  dd 
+    - if student.qualifier.quantum
+      span.label.label-success Quantum Mechanics
+    - else
+      span.label.label-important Quantum Mech. Not Completed
+  dd 
+    - if student.qualifier.astrophysics
+      span.label.label-success Astrophysics
+    - else
+      span.label.label-important Astrophysics Not Completed
+  dd 
+    - if student.qualifier.biophysics
+      span.label.label-success Astrophysics
+    - else
+      span.label.label-important Astrophysics. Not Completed
