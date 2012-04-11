@@ -9,15 +9,16 @@ html lang="en"
 
 
   body
-    .heading
-      p#department DEPARTMENT OF PHYSICS AND ASTRONOMY
-      ul.heading#contact
-        li 29 Peachtree Center Ave
-        li Atlanta, GA 30303-3083
-        li Phone:   404 / 413-6033
-        li FAX:     404 / 413-6025
-        li 
-        li = @department_chair.full_name
-        li = "Phone:   #{heading_format_phone(@department_chair.phone)}"
-        li = "E-mail:  #{@department_chair.email}"
-    = yield
+    .single-page
+      .heading
+        p#department DEPARTMENT OF PHYSICS AND ASTRONOMY
+        ul.heading#contact
+          li 29 Peachtree Center Ave
+          li Atlanta, GA 30303-3083
+          li Phone:   404 / 413-6033
+          li FAX:     404 / 413-6025
+          li 
+          li = @department_chair.full_name
+          li = "Phone:   #{heading_format_phone(@department_chair.phone)}"
+          li = "E-mail:  #{@department_chair.email}"
+      = yield

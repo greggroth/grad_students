@@ -5,13 +5,15 @@
 @import "twitter/bootstrap/mixins";
 
 body {
-  background-image: url('gsu_logo.jpg');
+  width: 6.5in;
+  margin: 0px;
+/*  background-image: url('gsu_logo.jpg');
   background-position: 5in 0in;
   .background-size(2in);
   background-repeat: no-repeat;
   width: 6.5in;
   font-family: "Times New Roman";
-  font-size: 11.5pt;
+  font-size: 11.5pt;*/
 }
 
 p#department {
@@ -46,14 +48,14 @@ ul.heading {
 }
 
 .salutations {
-  margin-top: 0.5in;
+  margin-top: 0.3in;
   margin-left: 1.5in;
 }
 
 ul.signoff {
   padding: 0px;
   list-style-type: none;
-  margin-top: 0.6in;
+  margin-top: 0.5in;
 }
 
 span.align-right {
@@ -63,7 +65,27 @@ span.align-right {
 
 div#letter {
   position: relative;
-  top: 0.3in;
+  top: 0.2in;
   left: 0.5in;
+  width: 6in;
+}
+
+p {
+  text-align: justify;
+}
+
+.single-page {
+  background-image: url('gsu_logo.jpg');
+  background-position: 4in 0in;
+  .background-size(2in);
+  background-repeat: no-repeat;
   width: 6.5in;
+  font-family: "Times New Roman";
+  font-size: 11.5pt;
+}
+
+@media print {
+  .single-page:not(:first-child) {
+    page-break-before: always;
+  }
 }
