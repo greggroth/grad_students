@@ -1,3 +1,6 @@
+- content_for :sidebar do
+  li = link_to "View offer letter (pdf)", letter_path(@student.id, format: "pdf")
+
 h2 
   = @student.full_name
   - if @student.status == "Left program early"
@@ -19,6 +22,8 @@ h3 = formatted_degree(@student)
       dd = number_to_phone @student.phone
       dt Entered
       dd = @student.year_entered
+      dt Stipend
+      dd = number_to_currency(@student.stipend, precision: 0)
       dt Alternate Research
       dd 
         - if @student.alt_research_1.present?

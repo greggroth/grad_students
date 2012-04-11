@@ -12,6 +12,7 @@ class Student < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :degree
   validates_uniqueness_of :last_name, scope: :first_name
   validates_format_of :panther_id, with: /\d\d\d\-\d\d\-\d\d\d\d/, allow_nil: true, allow_blank: true
+  validates_numericality_of :stipend, :year_entered, :ms_year, :phd_year, allow_nil: true
   
   before_create :check_for_qualifier
   

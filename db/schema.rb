@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411165421) do
+ActiveRecord::Schema.define(:version => 20120411183603) do
 
   create_table "committees", :force => true do |t|
     t.integer  "student_id"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(:version => 20120411165421) do
     t.string   "degree",          :default => "PhD"
     t.string   "status",          :default => "Current student"
     t.text     "notes"
+    t.decimal  "stipend"
   end
 
 end

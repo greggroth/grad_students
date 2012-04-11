@@ -5,7 +5,7 @@
   br
   | Department of Physics and Astronomy
   p = "Dear Mr/Ms #{@student.last_name}:"
-  p = "I am pleased to let you know that your support package beginning July 1, #{Time.now.year - 1} through June 30, #{Time.now.year} will be at the annual rate of $20,400.  You will be paid at a monthly rate of $1,700, paid at the end of each month, July #{Time.now.year - 1} through June #{Time.now.year}"
+  p = "I am pleased to let you know that your support package beginning July 1, #{Time.now.year - 1} through June 30, #{Time.now.year} will be at the annual rate of #{number_to_currency(@student.stipend, precision: 0)}.  You will be paid at a monthly rate of #{number_to_currency(@student.stipend/12)}, paid at the end of each month, July #{Time.now.year - 1} through June #{Time.now.year}"
   p 
     = "During this period, your instructional responsibilities will be teaching a number of the Introductory or higher level Physics two-or three-hour laboratories or their equivalent. The remainder of your responsibilities for receiving this support is full-time effort in the coursework and research activities required for your degree program.  You should register for a total number of semester credit hours each term (summer, fall, and spring) as advised by Dr. #{@graduate_advisor.last_name}. "
     span.highlight = "Each semester, before registration, you should make an appointment with Dr. #{@graduate_advisor.last_name} to be advised as to the distribution of these hours between specific courses and research credits."
