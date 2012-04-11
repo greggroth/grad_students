@@ -8,10 +8,25 @@
 
   = f.input :first_name
   = f.input :last_name
+  = f.input :phone
   = f.input :email, label: "E-mail"
+  ul.unstyled
+    li
+      = f.check_box :department_chair
+      = f.label :department_chair, class: "inline"
+    li
+      = f.check_box :graduate_advisor
+      = f.label :graduate_advisor, class: "inline"
+    li
+      = f.check_box :undergraduate_advisor
+      = f.label :undergraduate_adisor, class: "inline"
   - if @password.present?
     = hidden_field_tag "professor[password]", @password
     = hidden_field_tag "professor[password_confirmation]", @password
+  - elsif @professor == current_professor
+    = f.input :password
+    span.help-block Leave blank to keep current password
+    = f.input :password_confirmation
   .form-actions 
     = f.submit "Save", class: "btn btn-primary"
     = link_to "Cancel", professors_path, class: "btn btn-cancel"

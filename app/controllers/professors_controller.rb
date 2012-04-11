@@ -57,10 +57,19 @@ class ProfessorsController < ApplicationController
     @professor = Professor.find(params[:id])
 
     respond_to do |format|
-      if @professor.update_without_password(params[:professor])
-        format.html { redirect_to @professor, notice: 'Professor was successfully updated.' }
+      if @professor == current_professor && params[:password].present?
+        if @professor.update_attributes(params[:professor])
+          sign_in @professor, bypass: true
+          format.html { redirect_to @professor, notice: 'Professor was successfully updated.' }
+        else
+          format.html { render action: "edit" }
+        end
       else
-        format.html { render action: "edit" }
+        if @professor.update_without_password(params[:professor])
+          format.html { redirect_to @professor, notice: 'Professor was successfully updated.' }
+        else
+          format.html { render action: "edit" }
+        end
       end
     end
   end

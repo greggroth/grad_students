@@ -1,4 +1,6 @@
 GradStudents::Application.routes.draw do
+  get "letter/show"
+
   devise_for :professors
   
   root to: "students#index"
@@ -11,6 +13,7 @@ GradStudents::Application.routes.draw do
   resources :professors
   resources :students
   resources :meetings
+  resources :letters
   
   
   # The priority is based upon order of creation:
