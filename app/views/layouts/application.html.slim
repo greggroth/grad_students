@@ -31,31 +31,32 @@ html lang="en"
             span.icon-bar
           = link_to "GradStudentsDB", root_path, class: "brand"
           .container.nav-collapse
-            ul.nav
-              li.dropdown
-                a.dropdown-toggle href='#' data-toggle="dropdown"
-                  | Students
-                  b.caret
-                ul.dropdown-menu
-                  li= link_to "Current Students", students_path
-                  li= link_to "Past Students", students_path(past: true)
-                  li= link_to "New Student", new_student_path
-              li= link_to "Faculty", professors_path
-              li= link_to "Meetings", meetings_path
-              li.dropdown
-                a.dropdown-toggle href="#" data-toggle="dropdown"
-                  | Reports
-                  b.caret
-                ul.dropdown-menu
-                  li.nav-header Students
-                  li= link_to "List of all committees", students_committees_path
-                  li= link_to "Unsatisfied Qualifying Exams", students_incomplete_qualifier_path
-                  li= link_to "Unsatisfied Alternate Research", students_incomplete_research_path
-                  li= link_to "Incomplete CITI Training", students_incomplete_citi_path
-                  li= link_to "View all offer letters (pdf)", letters_path(format: "pdf")
-                  li.divider
-                  li.nav-header Professors
-                  li= link_to "Committees by Professor", professors_committees_path
+            - if professor_signed_in?
+              ul.nav
+                li.dropdown
+                  a.dropdown-toggle href='#' data-toggle="dropdown"
+                    | Students
+                    b.caret
+                  ul.dropdown-menu
+                    li= link_to "Current Students", students_path
+                    li= link_to "Past Students", students_path(past: true)
+                    li= link_to "New Student", new_student_path
+                li= link_to "Faculty", professors_path
+                li= link_to "Meetings", meetings_path
+                li.dropdown
+                  a.dropdown-toggle href="#" data-toggle="dropdown"
+                    | Reports
+                    b.caret
+                  ul.dropdown-menu
+                    li.nav-header Students
+                    li= link_to "List of all committees", students_committees_path
+                    li= link_to "Unsatisfied Qualifying Exams", students_incomplete_qualifier_path
+                    li= link_to "Unsatisfied Alternate Research", students_incomplete_research_path
+                    li= link_to "Incomplete CITI Training", students_incomplete_citi_path
+                    li= link_to "View all offer letters (pdf)", letters_path(format: "pdf")
+                    li.divider
+                    li.nav-header Professors
+                    li= link_to "Committees by Professor", professors_committees_path
     - if professor_signed_in?
       li.nav-right.hide-from-pdf == "Welcome, #{current_professor.full_name} (#{link_to('logout', destroy_professor_session_path, :method => :delete)} or #{link_to('change password', edit_professor_path(current_professor))})"
     .container

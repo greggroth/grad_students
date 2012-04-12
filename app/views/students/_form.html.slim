@@ -10,6 +10,7 @@
   = f.inputs "Basic Information" do
     = f.input :first_name, required: true
     = f.input :last_name, required: true
+    = f.input :sex, as: :select, collection: ["Male", "Female"], default: "Male", prompt: true, required: true
     = f.input :panther_id, label: "Panther ID", input_html: { id: "panther-id"}
     = f.input :email_2, label: "School E-mail"
     = f.input :email_2, label: "Personal E-mail"

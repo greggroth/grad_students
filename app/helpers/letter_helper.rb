@@ -5,4 +5,12 @@ module LetterHelper
     phone = phone_number.gsub(/[^0-9]/, '')  #remove any non-numerical characters
     "#{phone[0..2]} / #{phone[3..5]}-#{phone[6..9]}"
   end
+  
+  def salutation(student)
+    if student.sex == "Male"
+      "Mr."
+    else
+      "Ms."
+    end
+  end
 end

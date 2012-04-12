@@ -100,6 +100,7 @@ class Student < ActiveRecord::Base
   def passed_qualifier?
     tests_passed >= 4
   end
+
   
   private
   def check_for_qualifier
