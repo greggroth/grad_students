@@ -19,7 +19,12 @@ $(document).ready ->
     else
       $('.ms-only').hide()
       $('.phd-only').show()
-    
+  
+  externally_supported = () ->
+    if $('#student_externally_supported').is(':checked')
+      $('#student_stipend').hide()
+    else
+      $('#student_stipend').show()
   update_required_graduate_status_fields($('#student_degree').val())
       
   $('#student_degree').change (e) ->
@@ -30,6 +35,9 @@ $(document).ready ->
   $('.phone-number').inputmask('999-999-9999')
       
   show_or_hide_finished_inputs()
-  
   $("input[name='student[status]']").change () ->
     show_or_hide_finished_inputs()
+   
+  externally_supported() 
+  $('#student_externally_supported').change () ->
+    externally_supported()

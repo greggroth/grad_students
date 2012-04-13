@@ -16,7 +16,10 @@
     = f.input :email_2, label: "Personal E-mail"
     = f.input :lab_phone, label: "Lab Phone", input_html: { class: "phone-number" }
     = f.input :phone, label: "Personal Phone", input_html: { class: "phone-number" }
-    = f.input :stipend
+    = f.label "Stipend", class: "label"
+    = f.text_field :stipend
+    = f.check_box :externally_supported
+    = f.label :externally_supported, class: "inline"
     = f.input :notes
   = f.inputs "Degree Information" do
     = f.input :degree, as: :select, collection: ["Masters", "PhD"], default: "PhD", prompt: true, required: true

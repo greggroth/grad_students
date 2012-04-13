@@ -40,4 +40,12 @@ module ApplicationHelper
     params.delete("id")
     params
   end
+  
+  def salutation(student)
+    if student.sex == "Male"
+      "Mr."
+    else
+      "Ms."
+    end
+  end
 end

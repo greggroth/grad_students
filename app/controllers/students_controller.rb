@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  before_filter :admin_only, only: [:edit, :new, :create, :update, :destroy]
   
   # GET /students
   # GET /students.json
@@ -28,7 +29,7 @@ class StudentsController < ApplicationController
   def new
     @student = Student.new(ms_year: Time.now.year, phd_year: Time.now.year, status: "Current student")
     @student.build_default_qualifier
-    3.times { @student.committees.build }
+    @student.committees.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -101,6 +102,13 @@ class StudentsController < ApplicationController
   
   def committees
     @students = Student.includes(:committees, :professors).order('last_name')
+  end
+  
+  private
+  def admin_only
+    unless current_professor.admin?
+      redirect_to :back, notice: "Must be an admin to perform this action"
+    end
   end
 
 end

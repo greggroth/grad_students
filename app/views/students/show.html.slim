@@ -2,7 +2,7 @@
   li = link_to "View offer letter (pdf)", letter_path(@student.id, format: "pdf")
 
 h2 
-  = @student.full_name
+  = "#{salutation(@student)} #{@student.full_name}"
   - if @student.status == "Left program early"
     span.label.label-warning Left Early
   - if @student.status == "Graduated"
@@ -23,7 +23,10 @@ h3 = formatted_degree(@student)
       dt Entered
       dd = @student.year_entered
       dt Stipend
-      dd = number_to_currency(@student.stipend, precision: 0)
+      - if @student.externally_supported
+        dd Externally Supported
+      - else
+        dd = number_to_currency(@student.stipend, precision: 0)
       dt Alternate Research
       dd 
         - if @student.alt_research_1.present?
