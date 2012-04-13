@@ -8,8 +8,9 @@ gem 'rails', '3.2.2'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
-gem 'formtastic'
-gem 'formtastic-bootstrap'
+gem 'simple_form'
+# gem 'formtastic'
+# gem 'formtastic-bootstrap'
 
 
 # Gems used only for assets and not required

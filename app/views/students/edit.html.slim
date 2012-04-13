@@ -1,5 +1,2 @@
-/ = form_for @student, :url => student_path(@student), :html => { :class => "edit_student", :id => "edit_student" } do |f|
-/   input name="_method" type="hidden" value="put"
-/   = render :partial => "form", :locals => {:f => f}
-
-== render "form"
+h1 Edit Student
+= render "form"

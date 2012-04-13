@@ -1,13 +1,5 @@
-= semantic_nested_form_for @student, html: { class: "well" } do |f|
-  - if @student.errors.any?
-    .row
-      .span6.offset1
-        .alert.alert-error
-          | Houston we have some issues:
-          ul
-            - @student.errors.full_messages.each do |msg|
-              li = msg
-  = f.inputs "Basic Information" do
+= simple_nested_form_for @student, html: { class: "form-horizontal" } do |f|
+  = f.input "Basic Information" do
     = f.input :first_name, required: true
     = f.input :last_name, required: true
     = f.input :sex, as: :select, collection: ["Male", "Female"], default: "Male", prompt: true, required: true
@@ -16,64 +8,29 @@
     = f.input :email_2, label: "Personal E-mail"
     = f.input :lab_phone, label: "Lab Phone", input_html: { class: "phone-number" }
     = f.input :phone, label: "Personal Phone", input_html: { class: "phone-number" }
-    = f.label "Stipend", class: "label"
-    = f.text_field :stipend
-    = f.check_box :externally_supported
-    = f.label :externally_supported, class: "inline"
+    = f.input :stipend, wrapper_html: { id: "stipend"}
+    = f.input :externally_supported
     = f.input :notes
-  = f.inputs "Degree Information" do
+  = f.input "Degree Information" do
     = f.input :degree, as: :select, collection: ["Masters", "PhD"], default: "PhD", prompt: true, required: true
-    ul.unstyled.ms-only
-      li
-        = f.check_box :thesis_ms
-        = f.label :thesis_ms, "Thesis MS", class: "inline"
+    = f.input :thesis_ms, label: "Thesis MS", wrapper_html: { class: "ms-only"}
     = f.input :year_entered
-    li.number.input.optional.numeric.stringish
-      = f.label :ms_semester, "Expected Masters Graduation Date", class: "label"
-      = f.select :ms_semester, ["Spring", "Summer", "Fall"]
-      = f.text_field :ms_year
-    li.number.input.optional.numeric.stringish
-      = f.label :phd_semester, "Expected PhD Graduation Date", class: "phd-only label"
-      = f.select :phd_semester, ["Spring", "Summer", "Fall"], {}, {class: "phd-only"}
-      = f.text_field :phd_year, class: "phd-only"
-  = f.inputs "Degree Requirements" do
-    li.number.input.optional.numeric.stringish
-      = f.label "Alternate Research Skills", class: "label"
-      = f.text_field :alt_research_1
-      br
-      = f.text_field :alt_research_2, class: "phd-only"
-    li.number.input.optional.numeric.stringish.input-wide
-      = f.label "Status", class: "label"
-      ul.unstyled
-        - ["Current student", "Graduated", "Left program early"].each do |status|
-          li
-            = f.radio_button :status, status
-            = f.label :status, status, class: "inline"
-        li#time-finished
-          = f.select :semester_left, ["Spring", "Summer", "Fall"], {}, {class: "phd-only"}
-          = f.text_field :year_left
-    li.number.input.optional.numeric.stringish.input-wide
-      = f.label nil, "CITI Training", class: "label"
-      ul.unstyled
-        li
-          = f.check_box :citi_online
-          = f.label :citi_online, "CITI Online Training", class: "inline"
-        li
-          = f.check_box :citi_discussion
-          = f.label :citi_discussion, "CITI In-class Discussion", class: "inline"
-          
-  / = f.inputs 'CITI Training' do
-  /   row
-  /     .span3
-  /       table.table
-  /         tbody
-  /           tr 
-  /             td = f.label :citi_online, "CITI Online Training"
-  /             td = f.check_box :citi_online
-  /           tr
-  /             td = f.label :citi_discussion, "CITI In-class Discussion"
-  /             td = f.check_box :citi_discussion
-  = f.inputs 'Committee Members' do
+    = f.input :ms_semester, label: "MS Semester", collection: ["Spring", "Summer", "Fall"]
+    = f.input :ms_year, label: "MS Year"
+    = f.input :phd_semester, label: "PhD Semester", collection: ["Spring", "Summer", "Fall"], wrapper_html: {class: "phd-only"}
+    = f.input :phd_year, label: "PhD Year", wrapper_html: {class: "phd-only"}
+  = f.input "Degree Requirements" do
+    = f.input :alt_research_1, label: "Alternate Research Skill"
+    = f.input :alt_research_2, label: "Alternate Research Skill", wrapper_html: {class: "phd-only"}
+    = f.input :status, as: :radio_buttons, collection: ["Current student", "Graduated", "Left program early"]
+    = f.input :semester_left, label: "Semester student left program", collection: ["Spring", "Summer", "Fall"], wrapper_html: {class: "phd-only"}
+    = f.input :year_left, label: "Year student left"
+    
+  = f.input "CITI Training" do
+    = f.input :citi_online, label: "Online portion"
+    = f.input :citi_discussion, label: "In-class Discussion"
+
+  = f.input 'Committee Members' do
     table.table
       thead
         tr
@@ -84,9 +41,9 @@
           th.check PhD Chair
           th
       tbody#committee
-        = f.semantic_fields_for :committees
-  = f.link_to_add "Add a member", :committees, container: 'tbody#committee', fields_element: 'tr'
-  = f.inputs 'Qualifying Exam' do
+        = f.simple_fields_for :committees
+    = f.link_to_add "Add a member", :committees, container: 'tbody#committee', fields_element: 'tr'
+  = f.input 'Qualifying Exam' do
     = f.fields_for :qualifier do |qf|
       table.table
         thead
@@ -115,18 +72,3 @@
   .form-actions
     = f.submit "Submit", class: "btn btn-primary"
     = link_to "Cancel", :back, class: "btn btn-cancel"
-    
-/ .clearfix
-/   = f.label :year_left, t("activerecord.attributes.student.year_left", :default => "Year left"), :class => :label
-/   .input
-/     = f.number_field :year_left, :class => 'number_field'
-/ .clearfix
-/   = f.label :semester_left, t("activerecord.attributes.student.semester_left", :default => "Semester left"), :class => :label
-/   .input
-/     = f.text_field :semester_left, :class => 'text_field'
-
-/ 
-/ .form-actions
-/   button class="btn primary" type="submit" Save
-/   | or
-/   = link_to "Cancel", students_path

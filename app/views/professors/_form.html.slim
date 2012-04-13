@@ -1,25 +1,11 @@
-= semantic_form_for @professor do |f|
-  - if @professor.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@professor.errors.count, "error")} prohibited this professor from being saved:"
-      ul
-        - @professor.errors.full_messages.each do |message|
-          li = message
-
+= simple_form_for @professor, html: { class: "form-horizontal" } do |f|
   = f.input :first_name
   = f.input :last_name
   = f.input :phone
   = f.input :email, label: "E-mail"
-  ul.unstyled
-    li
-      = f.check_box :department_chair
-      = f.label :department_chair, class: "inline"
-    li
-      = f.check_box :graduate_advisor
-      = f.label :graduate_advisor, class: "inline"
-    li
-      = f.check_box :undergraduate_advisor
-      = f.label :undergraduate_adisor, class: "inline"
+  = f.input :department_chair
+  = f.input :graduate_advisor
+  = f.input :undergraduate_advisor
   - if @password.present?
     = hidden_field_tag "professor[password]", @password
     = hidden_field_tag "professor[password_confirmation]", @password
@@ -29,4 +15,4 @@
     = f.input :password_confirmation
   .form-actions 
     = f.submit "Save", class: "btn btn-primary"
-    = link_to "Cancel", professors_path, class: "btn btn-cancel"
+    = link_to "Cancel", :back, class: "btn btn-cancel"

@@ -22,9 +22,9 @@ $(document).ready ->
   
   externally_supported = () ->
     if $('#student_externally_supported').is(':checked')
-      $('#student_stipend').hide()
+      $('#stipend').hide()
     else
-      $('#student_stipend').show()
+      $('#stipend').show()
   update_required_graduate_status_fields($('#student_degree').val())
       
   $('#student_degree').change (e) ->

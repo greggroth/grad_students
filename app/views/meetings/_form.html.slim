@@ -1,9 +1,7 @@
-= semantic_form_for @meeting, html: { class: "well" } do |f|
-  = f.inputs do
-    = f.label :date, "Date"
-    = f.datetime_select :date, { ampm: true }, { class: "datetime_select" }
-    = f.input :notes
-  = f.inputs "Attendees" do
+= simple_form_for @meeting, html: { class: "form-horizontal" } do |f|
+  = f.input :date, input_html: { class: "datetime_select" }
+  = f.input :notes
+  = f.input "Attendees" do
     .tabbable
       ul.nav.nav-tabs
         li.active

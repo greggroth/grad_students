@@ -1,5 +1,5 @@
 tr.fields
-  td = f.input :professor, label: false, input_html: {class: "narrow"}
+  td = f.association :professor, label_method: :full_name, label: false, input_html: {class: "narrow"}, wrapper_html: { class: "table-select"}
   td.check = f.check_box :ms
   td.check = f.check_box :phd
   td.check = f.check_box :ms_chair

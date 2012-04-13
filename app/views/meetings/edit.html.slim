@@ -1,3 +1,2 @@
-= form_for @meeting, :url => meeting_path(@meeting), :html => { :class => "edit_meeting", :id => "edit_meeting" } do |f|
-  input name="_method" type="hidden" value="put"
-  = render :partial => "form", :locals => {:f => f}
+h1 Edit Meeting
+= render :partial => "form"
