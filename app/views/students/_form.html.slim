@@ -1,7 +1,7 @@
 = simple_nested_form_for @student, html: { class: "form-horizontal" } do |f|
   = f.input "Basic Information" do
-    = f.input :first_name, required: true
-    = f.input :last_name, required: true
+    = f.input :first_name, label: "First name", required: true
+    = f.input :last_name, label: "Last name", required: true
     = f.input :sex, as: :select, collection: ["Male", "Female"], default: "Male", prompt: true, required: true
     = f.input :panther_id, label: "Panther ID", input_html: { id: "panther-id"}
     = f.input :email_2, label: "School E-mail"
@@ -11,6 +11,7 @@
     = f.input :stipend, wrapper_html: { id: "stipend"}
     = f.input :externally_supported
     = f.input :notes
+    
   = f.input "Degree Information" do
     = f.input :degree, as: :select, collection: ["Masters", "PhD"], default: "PhD", prompt: true, required: true
     = f.input :thesis_ms, label: "Thesis MS", wrapper_html: { class: "ms-only"}
@@ -19,6 +20,7 @@
     = f.input :ms_year, label: "MS Year"
     = f.input :phd_semester, label: "PhD Semester", collection: ["Spring", "Summer", "Fall"], wrapper_html: {class: "phd-only"}
     = f.input :phd_year, label: "PhD Year", wrapper_html: {class: "phd-only"}
+    
   = f.input "Degree Requirements" do
     = f.input :alt_research_1, label: "Alternate Research Skill"
     = f.input :alt_research_2, label: "Alternate Research Skill", wrapper_html: {class: "phd-only"}

@@ -9,6 +9,10 @@ Given /^I am on the (.+) page$/ do |page|
   visit page
 end
 
+When /^BREAKPOINT$/ do
+  save_and_open_page
+end
+
 Then /^I should see "([^"]*)"$/ do |something_worth_seeing|
   page.should have_content something_worth_seeing
 end
