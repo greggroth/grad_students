@@ -3,9 +3,10 @@
   = f.input :last_name
   = f.input :phone
   = f.input :email, label: "E-mail"
-  = f.input :department_chair
-  = f.input :graduate_advisor
-  = f.input :undergraduate_advisor
+  - if current_professor.admin?
+    = f.input :department_chair
+    = f.input :graduate_advisor
+    = f.input :undergraduate_advisor
   - if @password.present?
     = hidden_field_tag "professor[password]", @password
     = hidden_field_tag "professor[password_confirmation]", @password

@@ -11,6 +11,11 @@ class StudentsController < ApplicationController
       @page_header = "Current Students"
       @students = Student.current_students.order('last_name')
     end
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @students }
+    end
   end
 
   # GET /students/1

@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Funding.create(
+  source: "PhD: Pre-Qualifier",
+  amount: 20000
+)
+
+Funding.create(
+  source: "PhD: Post-Qualifier",
+  amount: 21000
+)

@@ -8,13 +8,14 @@ namespace :import do
     #   4 - Retake two
     # QualTest:
     #   Incomplete Tests
-    
+    include ActiveSupport::Inflector
     
     doc = Hash.from_xml(File.open(args[:file_path]))
     doc["dataroot"]["Students"].each do |student|
-      student = Student.create(
-          first_name:           student["FirstName"],
-          last_name:            student["LastName"],
+      next if (student["LastName"].blank? || student["LastName"].blank?)
+      student = Student.new(
+          first_name:           titleize(student["FirstName"]),
+          last_name:            titleize(student["LastName"]),
           phone:                student["ContactNumber"].nil? ? nil : student["ContactNumber"].gsub(/[\(\)\s\-]/,""),
           email_1:              student["EmailAddress"],
           email_2:              student["EmailAddress2"],
@@ -23,20 +24,25 @@ namespace :import do
           phd_year:             student["PhDYear"],
           ms_semester:          student["MSSemester"],
           phd_semester:         student["PhDSemester"],
-          panther_id:           student["PantherID"].nil? ? nil : student["PantherID"].gsub(/\-/,""),
+          panther_id:           student["PantherID"].nil? ? nil : student["PantherID"],
           alt_research_1:       student["AltResearch_1"],
           alt_research_2:       student["AltResearch_2"],
           citi_online:          student["CITIonline"],
           citi_discussion:      student["CITIdiscussion"],
           legacy_id:            student["ID"],
-          left_program_early:   student["LeftProgramEarly"],
-          graduated:            student["Graduated"],
           lab_phone:            student["LabPhone"].nil? ? nil : student["LabPhone"].gsub(/[\(\)\s\-]/,""),
           thesis_ms:            student["ThesisMS"]
         )
+      if student["LeftProgramEarly"]
+        student.status = "Left program early"
+      elsif student["Graduated"]
+        student.status = "Graduated"
+      else
+        student.status = "Current student"
+      end
+      
+      puts "Adding #{student.last_name}" if student.save!
         
-      # student.build_qualifiers
-      # 
       # case student["QualStatus"]
       # when "2"  # Passed everything
       #   student.em = true
@@ -57,15 +63,20 @@ namespace :import do
     end
   end
   
-  task :faculty, [:file_path] => [:environment] do |t, args|
+  task :professors, [:file_path] => [:environment] do |t, args|
+    temp_password = (0...8).map{65.+(rand(25)).chr}.join
     doc = Hash.from_xml(File.open(args[:file_path]))
     doc["dataroot"]["CommitteeMembers"].each do |professor|
-      Professor.create(
-          first_name:           professor["FirstName"],
-          last_name:            professor["LastName"],
-          email:                professor["Email"],
-          legacy_id:            professor["ID"]
-        )
+      next if (professor["FirstName"].blank? || professor["LastName"].blank?)
+      professor = Professor.new(
+          first_name:            professor["FirstName"],
+          last_name:             professor["LastName"],
+          email:                 professor["Email"] || "update_email_#{professor['ID']}@gsu.edu",
+          legacy_id:             professor["ID"],
+          password:              temp_password,
+          password_confirmation: temp_password
+        )        
+      puts "Saved #{professor.last_name}" if professor.save!
     end
   end
   
@@ -74,6 +85,8 @@ namespace :import do
     doc["dataroot"]["Committees"].each do |committee|
       student = Student.find_by_legacy_id(committee["StudentID"])
       professor = Professor.find_by_legacy_id(committee["MemberID"])
+      puts "error with student id: #{committee["StudentID"]} and professor id: #{committee["MemberID"]}" if (student.nil? || professor.nil?)
+      puts "adding #{professor.full_name} to #{student.full_name}'s committee"
       Committee.create(
         student_id:      student.id,
         professor_id:    professor.id,
@@ -99,6 +112,7 @@ namespace :import do
   task :student_meetings, [:file_path] => [:environment] do |t, args|
     doc = Hash.from_xml(File.open(args[:file_path]))
     doc["dataroot"]["StudentMeetings"].each do |student_meeting|
+      next if student_meeting["MeetingID"].nil? || student_meeting["StudentID"].nil?
       meeting = Meeting.find_by_legacy_id(student_meeting["MeetingID"])
       student = Student.find_by_legacy_id(student_meeting["StudentID"])
       MeetingAttendance.create( student_id: student.id, meeting_id: meeting.id )
