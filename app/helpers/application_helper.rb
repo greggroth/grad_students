@@ -42,10 +42,8 @@ module ApplicationHelper
   end
   
   def salutation(student)
-    if student.sex == "Male"
-      "Mr."
-    else
-      "Ms."
-    end
+    return "Mr." if student.sex == "Male"
+    return "Ms." if student.sex == "Female"
+    "Mr."
   end
 end

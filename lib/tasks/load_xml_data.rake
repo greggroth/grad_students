@@ -1,5 +1,14 @@
 desc  "Import data to the database from an xml file"
 namespace :import do
+  
+  task :all, [:directory] => [:environment] do |t, args|
+    Rake::Task['import:students'].invoke("#{args[:directory]}/Students.xml")
+    Rake::Task['import:professors'].invoke("#{args[:directory]}/CommitteeMembers.xml")
+    Rake::Task['import:committees'].invoke("#{args[:directory]}/Committees.xml")
+    Rake::Task['import:meetings'].invoke("#{args[:directory]}/Meetings.xml")
+    Rake::Task['import:student_meetings'].invoke("#{args[:directory]}/StudentMeetings.xml")
+  end
+  
   task :students, [:file_path] => [:environment] do |t, args|
     # QualStatus:
     #   1 - Needs to take
@@ -13,7 +22,7 @@ namespace :import do
     doc = Hash.from_xml(File.open(args[:file_path]))
     doc["dataroot"]["Students"].each do |student|
       next if (student["LastName"].blank? || student["LastName"].blank?)
-      student = Student.new(
+      new_student = Student.new(
           first_name:           titleize(student["FirstName"]),
           last_name:            titleize(student["LastName"]),
           phone:                student["ContactNumber"].nil? ? nil : student["ContactNumber"].gsub(/[\(\)\s\-]/,""),
@@ -33,15 +42,22 @@ namespace :import do
           lab_phone:            student["LabPhone"].nil? ? nil : student["LabPhone"].gsub(/[\(\)\s\-]/,""),
           thesis_ms:            student["ThesisMS"]
         )
-      if student["LeftProgramEarly"]
-        student.status = "Left program early"
-      elsif student["Graduated"]
-        student.status = "Graduated"
+        
+      if student["MSStudent"] == "1"
+        new_student.degree = "Masters"
       else
-        student.status = "Current student"
+        new_student.degree = "PhD"
+      end
+        
+      if student["LeftProgramEarly"] == "1"
+        new_student.status = "Left program early"
+      elsif student["Graduated"] == "1"
+        new_student.status = "Graduated"
+      else
+        new_student.status = "Current student"
       end
       
-      puts "Adding #{student.last_name}" if student.save!
+      puts "Adding #{new_student.last_name}" if new_student.save!
         
       # case student["QualStatus"]
       # when "2"  # Passed everything
