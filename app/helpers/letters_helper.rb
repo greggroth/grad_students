@@ -1,4 +1,4 @@
-module LetterHelper
+module LettersHelper
   
   def heading_format_phone(phone_number)
     return "none" if phone_number.nil?

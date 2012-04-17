@@ -1,0 +1,7 @@
+= simple_form_for @fundings, url: update_fundings_path, method: :put, html: { class: "form-horizontal" } do
+  - @fundings.each do |funding|
+    = simple_fields_for "fundings[]", funding do |f|
+      = f.input :amount, label: funding.source
+  .form-actions
+    = submit_tag "Update", class: "btn btn-primary"
+    = link_to "Cancel", :back, class: "btn btn-cancel"

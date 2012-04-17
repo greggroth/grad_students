@@ -1,6 +1,7 @@
 class Funding < ActiveRecord::Base
   validates_presence_of :source, :amount
   validates_uniqueness_of :source
+  validates_numericality_of :amount
   
   def self.prequal
     where(source: "PhD: Pre-Qualifier")[0].amount
