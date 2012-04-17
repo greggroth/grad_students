@@ -57,6 +57,14 @@ namespace :import do
         new_student.status = "Current student"
       end
       
+      new_student.build_qualifier
+      if student["QualStatus"] == "1"
+        new_student.qualifier.em = true
+        new_student.qualifier.class_mech = true
+        new_student.qualifier.stat_mech = true
+        new_student.qualifier.quantum = true
+      end
+      
       puts "Adding #{new_student.last_name}" if new_student.save!
         
       # case student["QualStatus"]
