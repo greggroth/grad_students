@@ -60,5 +60,8 @@ module GradStudents
     
     # Fix for precompiling on Heroku
     config.assets.initialize_on_precompile = false
+    
+    # Compile letters.css
+    config.assets.precompile += ['letters.css']
   end
 end
