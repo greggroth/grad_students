@@ -9,7 +9,7 @@ dl.dl-horizontal
   dd
 
 
-.form-actions
+.form-actions.hide-from-pdf
   = link_to "Back", :back, :class => 'btn'
   = link_to "Edit", edit_meeting_path(@meeting), :class => 'btn'
   = link_to "Delete", meeting_path(@meeting), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn'

@@ -17,6 +17,7 @@ h2 Student Committees
     .tab-pane#2
       = render "committees", {committees: @past_committees, professor: @professor}
 
-= link_to 'Edit ', edit_professor_path(@professor), class: 'hide-from-pdf'
-'|
-= link_to 'Back', :back, class: 'hide-from-pdf'
+.form-actions.hide-from-pdf
+  = link_to "Back", :back, :class => 'btn'
+  = link_to 'Edit ', edit_professor_path(@professor), :class => 'btn'
+  = link_to "Delete", professor_path(@professor), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn'
