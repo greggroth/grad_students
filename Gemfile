@@ -35,6 +35,7 @@ group :development do
   gem 'pry'
   gem 'pry-doc'
   gem 'awesome_print'
+  gem 'taps', "~>0.3.23"
 end
 
 group :test do
@@ -54,7 +55,6 @@ gem 'pdfkit'
 gem 'foreman'
 gem 'unicorn'
 gem 'heroku', "~>2.6.1"
-gem 'taps', "~>0.3.23"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
