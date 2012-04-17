@@ -10,4 +10,7 @@ class Funding < ActiveRecord::Base
     where(source: "PhD: Post-Qualifier")[0].amount
   end
   
+  def self.ms
+    where(source: "MS")[0].amount
+  end
 end

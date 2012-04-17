@@ -25,8 +25,10 @@ h3 = formatted_degree(@student)
       dt Stipend
       - if @student.externally_supported
         dd Externally Supported
+      - elsif @student.ms_student?
+        dd = "#{number_to_currency(Funding.ms, precision: 0)}/class"
       - else
-        dd = number_to_currency(@student.stipend, precision: 0)
+        dd = number_to_currency(@student.funding, precision: 0)
       dt Alternate Research
       dd 
         - if @student.alt_research_1.present?

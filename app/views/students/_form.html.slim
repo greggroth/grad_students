@@ -8,8 +8,8 @@
     = f.input :email_2, label: "Personal E-mail"
     = f.input :lab_phone, label: "Lab Phone", input_html: { class: "phone-number" }
     = f.input :phone, label: "Personal Phone", input_html: { class: "phone-number" }
-    = f.input :stipend, wrapper_html: { id: "stipend"}
-    = f.input :externally_supported
+    / = f.input :stipend, wrapper_html: { id: "stipend"}
+    = f.input :externally_supported, label: "Externally Supported?"
     = f.input :notes
     
   = f.input "Degree Information" do

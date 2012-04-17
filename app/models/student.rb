@@ -100,6 +100,15 @@ class Student < ActiveRecord::Base
   def passed_qualifier?
     tests_passed >= 4
   end
+  
+  def funding
+    return false unless phd_student?
+    if passed_qualifier?
+      Funding.postqual
+    else
+      Funding.prequal
+    end
+  end
 
   
   private

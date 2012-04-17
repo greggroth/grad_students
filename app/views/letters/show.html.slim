@@ -1,4 +1,6 @@
 - if @student.externally_supported
   = render 'external_body', { student: @student, department_chair: @department_chair, graduate_advisor: @graduate_advisor } 
+- elsif @student.ms_student?
+  = render 'ms_body', { student: @student, department_chair: @department_chair, graduate_advisor: @graduate_advisor } 
 - else
   = render 'body', { student: @student, department_chair: @department_chair, graduate_advisor: @graduate_advisor } 
