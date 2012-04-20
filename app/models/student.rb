@@ -64,11 +64,11 @@ class Student < ActiveRecord::Base
   def self.incomplete_research(options={})
     case options
     when :ms
-      self.where('degree = ? AND alt_research_1 = ?', 'Masters', '')
+      where('degree = ? AND alt_research_1 IS ?', 'Masters', nil)
     when :phd
-      self.where('degree = ? AND (alt_research_1 = ? OR alt_research_2 = ?)', 'PhD', '','')
+      where('degree = ? AND (alt_research_1 IS ? OR alt_research_2 IS ?)', 'PhD', nil, nil)
     else
-      self.incomplete_research(:ms) + self.incomplete_research(:phd)
+      incomplete_research(:ms) + incomplete_research(:phd)
     end
   end
   
