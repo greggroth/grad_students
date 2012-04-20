@@ -110,6 +110,10 @@ class Student < ActiveRecord::Base
       Funding.prequal
     end
   end
+  
+  def current_student?
+    status == "Current student"
+  end
 
   
   private

@@ -1,4 +1,4 @@
-h1 Professors and who they committee
+h1 Professors and who they currently committee
 table.table
   thead
   tbody
@@ -15,6 +15,7 @@ table.table
                   th PhD
               tbody
                 - professor.committees.includes(:student).order('students.last_name').each do |committee|
+                  - next unless committee.student.current_student?
                   tr
                     td = link_to committee.student.full_name, committee.student
                     td.check == committee.ms_chair ? "Chair" : ok_or_not_ok(committee.ms)
