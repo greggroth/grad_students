@@ -16,5 +16,4 @@ table.table.table-striped.list
         td = link_to professor.full_name, professor, class: "filtered-by"
         td = mail_to professor.email, professor.email, class: "filtered-by"
         td = link_to 'Edit', edit_professor_path(professor)
-        td = link_to 'Destroy', professor, :method => :delete, :confirm => "#{t('web-app-theme.confirm', :default => 'Are you sure?')}"
 br
