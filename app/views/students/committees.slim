@@ -1,10 +1,28 @@
 h1 Students and their committees
-table.table
-  thead
-  tbody
-    - @students.each do |student|
-      tr
-        td = link_to student.full_name, student
-        td
-          - unless student.committees.empty?
-            = render "committees", student: student
+.tabbable
+  ul.nav.nav-tabs
+    li.active
+      a href="#1" data-toggle="tab" Current Students
+    li
+      a href="#2" data-toggle="tab" Past Students
+  .tab-content
+    .tab-pane.active#1
+      table.table
+        thead
+        tbody
+          - @current_students.each do |student|
+            tr
+              td = link_to student.full_name, student
+              td
+                - unless student.committees.empty?
+                  = render "committees", student: student
+    .tab-pane#2
+      table.table
+        thead
+        tbody
+          - @past_students.each do |student|
+            tr
+              td = link_to student.full_name, student
+              td
+                - unless student.committees.empty?
+                  = render "committees", student: student

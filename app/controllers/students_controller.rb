@@ -106,7 +106,8 @@ class StudentsController < ApplicationController
   end
   
   def committees
-    @students = Student.includes(:committees, :professors).order('last_name')
+    @current_students = Student.includes(:committees, :professors).current_students.order('last_name')
+    @past_students = Student.includes(:committees, :professors).past_students.order('last_name')
   end
   
   private
