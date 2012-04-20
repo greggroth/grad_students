@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LetterController do
+describe LettersController do
 
   describe "GET 'show'" do
     it "returns http success" do

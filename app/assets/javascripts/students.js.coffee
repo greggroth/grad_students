@@ -45,16 +45,21 @@ $(document).ready ->
   $('#student_unique_stipend').change () ->
     unique_stipend()
     
-  listFilter = (form) ->
+  listFilter = (form, list) ->
     $(form).children('input').change () ->
       filter = $(this).val()
       if filter
-        $('#list').removeClass('table-striped')
-        $('#list').find("a.filtered-by:not(:Contains(" + filter + "))").parents('tr').hide()
-        $('#list').find("a.filtered-by:Contains(" + filter + ")").parents('tr').show()
+        $(list).removeClass('table-striped')
+        $(list).find("a.filtered-by:not(:Contains(" + filter + "))").parents('tr').hide()
+        $(list).find("a.filtered-by:Contains(" + filter + ")").parents('tr').show()
       else
-        $('#list').addClass('table-striped').find("tr").show();
+        $(list).addClass('table-striped').find("tr").show();
     .keyup () ->
       $(this).change()
         
-  listFilter($("form.filterform"))
+  listFilter($("form.filterform"), $('.list'))
+
+  $('i.clear-search').click ->
+    $(this).prev('input').val('').trigger('change')    
+    
+    

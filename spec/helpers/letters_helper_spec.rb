@@ -10,6 +10,6 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe LetterHelper do
+describe LettersHelper do
   pending "add some examples to (or delete) #{__FILE__}"
 end

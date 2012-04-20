@@ -2,8 +2,9 @@ h1 Faculty
 form.filterform.form-search action="#"
   = label_tag "filterString", "Filter:"
   = text_field_tag "filterString", nil, class: "input-medium search-query"
+  i.icon-remove.clear-search
 = link_to 'New Professor', new_professor_path, class: "hide-from-pdf"
-table.table.table-striped#list
+table.table.table-striped.list
   thead
     tr
       th Name

@@ -1,22 +1,18 @@
-h1 = @page_header
+h1 Students
 form.filterform.form-search action="#"
   = label_tag "filterString", "Filter:"
   = text_field_tag "filterString", nil, class: "input-medium search-query"
+  i.icon-remove.clear-search
 = link_to "New Student", new_student_path, class: "hide-from-pdf"
-table.table.table-striped#list
-  thead
-    tr
-      th Name
-      th E-mail
-      th
-      th
-  tbody
-    - @students.each do |student|
-      tr
-        td 
-          = link_to student.full_name, student_path(student), class: "filtered-by"
-          - if student.status == "Left program early"
-            span.label.label-warning Left Early
-        td = mail_to student.email_1, student.email_1, class: "filtered-by"
-        td.hide-from-pdf = link_to "Edit", edit_student_path(student)
-        td.hide-from-pdf = link_to "Destroy", student_path(student), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+
+.tabbable
+  ul.nav.nav-tabs
+    li.active
+      a href="#1" data-toggle="tab" Current Students
+    li
+      a href="#2" data-toggle="tab" Past Students
+  .tab-content
+    .tab-pane.active#1
+      = render "student_list", students: @current_students
+    .tab-pane#2
+      = render "student_list", students: @past_students

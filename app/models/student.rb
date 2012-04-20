@@ -14,6 +14,7 @@ class Student < ActiveRecord::Base
   validates_format_of :panther_id, with: /\d\d\d\-\d\d\-\d\d\d\d/, allow_nil: true, allow_blank: true
   validates_numericality_of :stipend, :year_entered, :ms_year, :phd_year, allow_nil: true
   
+  before_save :store_stipend_for_graduated_student
   before_create :check_for_qualifier
   
   def to_param
@@ -105,6 +106,7 @@ class Student < ActiveRecord::Base
     return stipend if unique_stipend    
     return nil unless phd_student?
     if passed_qualifier?
+      puts "qual"
       Funding.postqual
     else
       Funding.prequal
@@ -120,6 +122,14 @@ class Student < ActiveRecord::Base
   def check_for_qualifier
     if qualifier.nil?
       build_qualifier
+    end
+  end
+  
+  def store_stipend_for_graduated_student
+    unless current_student?
+      puts "so far so good"
+      self.stipend = self.funding
+      self.unique_stipend = true
     end
   end
 end

@@ -1,0 +1,22 @@
+table.table.table-striped.list
+  thead
+    tr
+      th Name
+      th E-mail
+      th
+      th
+  tbody
+    - students.each do |student|
+      tr
+        td 
+          = link_to student.full_name, student_path(student), class: "filtered-by"
+          - if student.status == "Left program early"
+            span.label.label-warning Left Early
+        - if student.current_student?
+          td = mail_to student.email_1, student.email_1, class: "filtered-by"
+        - elsif student.email_2.present?
+          td = mail_to student.email_2, student.email_2, class: "filtered-by"
+        - else
+          td = mail_to student.email_1, student.email_1, class: "filtered-by"
+        td = student.degree
+        td.hide-from-pdf = link_to "Edit", edit_student_path(student)

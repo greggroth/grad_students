@@ -4,13 +4,15 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index    
-    if params[:past]
-      @page_header = "Past Students"
-      @students = Student.past_students.order('last_name')
-    else
-      @page_header = "Current Students"
-      @students = Student.current_students.order('last_name')
-    end
+    # if params[:past]
+    #   @page_header = "Past Students"
+    #   @students = Student.past_students.order('last_name')
+    # else
+    #   @page_header = "Current Students"
+    #   @students = Student.current_students.order('last_name')
+    # end
+    @current_students = Student.current_students.order('last_name')
+    @past_students = Student.past_students.order('last_name')
     
     respond_to do |format|
       format.html
