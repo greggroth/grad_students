@@ -1,6 +1,9 @@
 h1 = @page_header
+form.filterform.form-search action="#"
+  = label_tag "filterString", "Filter:"
+  = text_field_tag "filterString", nil, class: "input-medium search-query"
 = link_to "New Student", new_student_path, class: "hide-from-pdf"
-table.table.table-striped
+table.table.table-striped#list
   thead
     tr
       th Name
@@ -11,9 +14,9 @@ table.table.table-striped
     - @students.each do |student|
       tr
         td 
-          = link_to student.full_name, student_path(student)
+          = link_to student.full_name, student_path(student), class: "filtered-by"
           - if student.status == "Left program early"
             span.label.label-warning Left Early
-        td = mail_to student.email_1
+        td = mail_to student.email_1, student.email_1, class: "filtered-by"
         td.hide-from-pdf = link_to "Edit", edit_student_path(student)
         td.hide-from-pdf = link_to "Destroy", student_path(student), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"

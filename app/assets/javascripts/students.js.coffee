@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
+  $.expr[':'].Contains = (a,i,m) ->
+      return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase())>=0
+      
   $('a#add-committee-member').click (e) ->
     e.preventDefault
     console.log("Clicked")
@@ -41,3 +44,17 @@ $(document).ready ->
   unique_stipend() 
   $('#student_unique_stipend').change () ->
     unique_stipend()
+    
+  listFilter = (form) ->
+    $(form).children('input').change () ->
+      filter = $(this).val()
+      if filter
+        $('#list').removeClass('table-striped')
+        $('#list').find("a.filtered-by:not(:Contains(" + filter + "))").parents('tr').hide()
+        $('#list').find("a.filtered-by:Contains(" + filter + ")").parents('tr').show()
+      else
+        $('#list').addClass('table-striped').find("tr").show();
+    .keyup () ->
+      $(this).change()
+        
+  listFilter($("form.filterform"))
