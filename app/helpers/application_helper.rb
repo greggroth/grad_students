@@ -29,8 +29,8 @@ module ApplicationHelper
   def ok_or_not_ok(truthy)
     if truthy
       "<i class='icon-ok' />"
-    else
-      "<i class='icon-remove' />"
+    # else
+    #       "<i class='icon-remove' />"
     end
   end
   
