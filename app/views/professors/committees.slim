@@ -1,8 +1,9 @@
-h1 Professors and who they currently committee
+h1 Current Committees for each Professor
 table.table
   thead
   tbody
     - @professors.each do |professor|
+      - next if professor.current_committees.empty?
       tr
         td = link_to professor.full_name, professor
         td
@@ -14,7 +15,7 @@ table.table
                   th MS
                   th PhD
               tbody
-                - professor.committees.includes(:student).order('students.last_name').each do |committee|
+                - professor.current_committees.order('students.last_name').each do |committee|
                   - next unless committee.student.current_student?
                   tr
                     td = link_to committee.student.full_name, committee.student
