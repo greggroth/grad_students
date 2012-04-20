@@ -41,10 +41,16 @@ h3 = formatted_degree(@student)
             = @student.alt_research_2
           - else
             span.label.label-important Alternate Research Not Met
-      dt Expected Masters
-      dd = "#{@student.ms_semester} #{@student.ms_year}"
+      - if @student.current_student?
+        dt Expected Masters
+      - else
+        dt Received Masters
+      dd = "#{@student.ms_semester} #{@student.ms_year}"      
       - if @student.phd_student?
-        dt Expected PhD
+        - if @student.current_student?
+          dt Expected PhD
+        - else
+          dt Received PhD
         dd = "#{@student.phd_semester} #{@student.phd_year}"
   .span5
     dl.dl-horizontal
