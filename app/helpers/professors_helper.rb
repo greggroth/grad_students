@@ -9,6 +9,8 @@ module ProfessorsHelper
       "Department Chair"
     elsif professor.associate_chair
       "Associate Chair"
+    elsif professor.lab_coordinator
+      "Lab Coordinator"
     end
   end
   

@@ -2,12 +2,13 @@
   = f.input :first_name
   = f.input :last_name
   = f.input :phone
-  = f.input :email, label: "E-mail"
+  = f.input :email, label: "E-mail", required: true
   - if current_professor.admin?
     = f.input :department_chair
     = f.input :associate_chair
     = f.input :graduate_advisor
     = f.input :undergraduate_advisor
+    = f.input :lab_coordinator
   - if @password.present?
     = hidden_field_tag "professor[password]", @password
     = hidden_field_tag "professor[password_confirmation]", @password

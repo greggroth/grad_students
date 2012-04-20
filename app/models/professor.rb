@@ -15,7 +15,8 @@ class Professor < ActiveRecord::Base
                   :undergraduate_advisor, 
                   :phone,
                   :legacy_id,
-                  :associate_chair
+                  :associate_chair,
+                  :lab_coordinator
   has_many :committees, dependent: :destroy
   has_many :students, through: :committees
   validates_presence_of :first_name, :last_name

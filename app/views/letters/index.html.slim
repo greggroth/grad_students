@@ -23,8 +23,8 @@ html lang="en"
             li = "Phone:   #{heading_format_phone(@department_chair.phone)}"
             li = "E-mail:  #{@department_chair.email}"
         - if @student.externally_supported
-          = render 'external_body', { student: @student, department_chair: @department_chair, graduate_advisor: @graduate_advisor } 
+          = render 'external_body', { student: @student, department_chair: @department_chair, graduate_advisor: @graduate_advisor, lab_coordinator: @lab_coordinator } 
         - elsif @student.ms_student?
-          = render 'ms_body', { student: @student, department_chair: @department_chair, graduate_advisor: @graduate_advisor } 
+          = render 'ms_body', { student: @student, department_chair: @department_chair, graduate_advisor: @graduate_advisor, lab_coordinator: @lab_coordinator } 
         - else
-          = render 'body', { student: @student, department_chair: @department_chair, graduate_advisor: @graduate_advisor }
+          = render 'body', { student: @student, department_chair: @department_chair, graduate_advisor: @graduate_advisor, lab_coordinator: @lab_coordinator }
