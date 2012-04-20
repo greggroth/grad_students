@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416220538) do
+ActiveRecord::Schema.define(:version => 20120420174505) do
 
   create_table "committees", :force => true do |t|
     t.integer  "student_id"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20120416220538) do
     t.decimal  "stipend"
     t.string   "sex"
     t.boolean  "externally_supported"
+    t.boolean  "unique_stipend"
   end
 
 end

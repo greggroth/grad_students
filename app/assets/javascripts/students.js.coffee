@@ -20,11 +20,11 @@ $(document).ready ->
       $('.ms-only').hide()
       $('.phd-only').show()
   
-  externally_supported = () ->
-    if $('#student_externally_supported').is(':checked')
-      $('#stipend').hide()
-    else
+  unique_stipend = () ->
+    if $('#student_unique_stipend').is(':checked')
       $('#stipend').show()
+    else
+      $('#stipend').hide()
   update_required_graduate_status_fields($('#student_degree').val())
       
   $('#student_degree').change (e) ->
@@ -38,6 +38,6 @@ $(document).ready ->
   $("input[name='student[status]']").change () ->
     show_or_hide_finished_inputs()
    
-  externally_supported() 
-  $('#student_externally_supported').change () ->
-    externally_supported()
+  unique_stipend() 
+  $('#student_unique_stipend').change () ->
+    unique_stipend()

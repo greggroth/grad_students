@@ -15,3 +15,8 @@ Funding.create(
   source: "PhD: Post-Qualifier",
   amount: 21000
 )
+
+Funding.create(
+  source: "MS",
+  amount: 1000
+)

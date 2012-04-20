@@ -102,7 +102,8 @@ class Student < ActiveRecord::Base
   end
   
   def funding
-    return false unless phd_student?
+    return stipend if unique_stipend    
+    return nil unless phd_student?
     if passed_qualifier?
       Funding.postqual
     else
