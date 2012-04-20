@@ -5,6 +5,7 @@
   = f.input :email, label: "E-mail"
   - if current_professor.admin?
     = f.input :department_chair
+    = f.input :associate_chair
     = f.input :graduate_advisor
     = f.input :undergraduate_advisor
   - if @password.present?

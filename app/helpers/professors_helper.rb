@@ -7,6 +7,8 @@ module ProfessorsHelper
       "Undergraduate Advisor"
     elsif professor.department_chair
       "Department Chair"
+    elsif professor.associate_chair
+      "Associate Chair"
     end
   end
   

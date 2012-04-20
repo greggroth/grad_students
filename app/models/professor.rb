@@ -14,7 +14,8 @@ class Professor < ActiveRecord::Base
                   :graduate_advisor, 
                   :undergraduate_advisor, 
                   :phone,
-                  :legacy_id
+                  :legacy_id,
+                  :associate_chair
   has_many :committees, dependent: :destroy
   has_many :students, through: :committees
   validates_presence_of :first_name, :last_name
@@ -50,7 +51,7 @@ class Professor < ActiveRecord::Base
   end
   
   def admin?
-    department_chair || undergraduate_advisor || graduate_advisor
+    department_chair || undergraduate_advisor || graduate_advisor || associate_chair
   end
   
 end

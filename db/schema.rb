@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420174505) do
+ActiveRecord::Schema.define(:version => 20120420232346) do
 
   create_table "committees", :force => true do |t|
     t.integer  "student_id"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20120420174505) do
     t.boolean  "undergraduate_advisor",  :default => false, :null => false
     t.boolean  "department_chair",       :default => false, :null => false
     t.string   "phone"
+    t.boolean  "associate_chair"
   end
 
   add_index "professors", ["email"], :name => "index_professors_on_email", :unique => true
