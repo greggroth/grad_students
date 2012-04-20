@@ -12,7 +12,7 @@ table.table.table-bordered.table-condensed
               td
                 = link_to chair.full_name, chair
                 span.label Chair
-          - student.committees.select(&:ms).map(&:professor).each do |member|
+          - student.committees.select(&:ms).delete_if { |i| i.ms_chair }.map(&:professor).each do |member|
             tr
               td
                 = link_to member.full_name, member
@@ -24,7 +24,7 @@ table.table.table-bordered.table-condensed
                   td
                     = link_to chair.full_name, chair
                     span.label Chair
-              - student.committees.select(&:phd).map(&:professor).each do |member|
+              - student.committees.select(&:phd).delete_if { |i| i.phd_chair }.map(&:professor).each do |member|
                 tr
                   td
                     = link_to member.full_name, member
