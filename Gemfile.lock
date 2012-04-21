@@ -99,6 +99,8 @@ GEM
     kgio (2.7.4)
     launchy (2.1.0)
       addressable (~> 2.2.6)
+    lazy_high_charts (1.1.5)
+      bundler (~> 1.0)
     less (2.0.10)
       commonjs (~> 0.2.0)
       therubyracer (~> 0.9.9)
@@ -243,6 +245,7 @@ DEPENDENCIES
   heroku (~> 2.6.1)
   jquery-rails
   launchy
+  lazy_high_charts (~> 1.1.5)
   less-rails
   nested_form!
   pdfkit

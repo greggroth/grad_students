@@ -9,6 +9,7 @@ GradStudents::Application.routes.draw do
   match 'students/incomplete_research' => 'students#incomplete_research'
   match 'students/incomplete_citi' => 'students#incomplete_citi'
   match 'students/committees' => 'students#committees'
+  match 'students/funding' => 'students#funding'
   match 'professors/committees' => 'professors#committees'
   match 'fundings/edit' => 'fundings#edit', as: :edit_fundings
   match 'fundings/update' => 'fundings#update', as: :update_fundings, via: :put

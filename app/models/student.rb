@@ -116,6 +116,37 @@ class Student < ActiveRecord::Base
   def current_student?
     status == "Current student"
   end
+  
+  def self.funding_by_year(options = {})
+    # returns a hash with [year] => [avg_stipend] pairs
+    data = {}
+    case options
+    when :prequal
+    Student.all.keep_if { |stu| !stu.passed_qualifier? && !stu.externally_supported }
+              .group_by(&:phd_year)
+              .delete_if { |k,v| k.nil? || k > Time.now.year }
+              .each do |key, value|
+                new_array = value.map(&:funding)
+                data[key] = (new_array.inject { |sum, n| sum + n }/new_array.length).to_i
+               end
+    when :postqual
+      Student.all.keep_if { |stu| stu.passed_qualifier? && !stu.externally_supported }
+                .group_by(&:phd_year)
+                .delete_if { |k,v| k.nil? || k > Time.now.year }
+                .each do |key, value|
+                  new_array = value.map(&:funding)
+                  data[key] = (new_array.inject { |sum, n| sum + n }/new_array.length).to_i
+                 end
+    else
+      Student.all.group_by(&:phd_year)
+                .delete_if { |k,v| k.nil? || k > Time.now.year }
+                .each do |key, value|
+                  new_array = value.map(&:funding)
+                  data[key] = (new_array.inject { |sum, n| sum + n }/new_array.length).to_i
+                 end
+    end
+    data.to_a.sort
+  end
 
   
   private

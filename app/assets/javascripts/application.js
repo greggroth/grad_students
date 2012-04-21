@@ -18,3 +18,5 @@
 //= require jquery_nested_form
 //= require students
 //= require professors
+//= require highcharts
+//= require highcharts_exporting

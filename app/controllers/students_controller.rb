@@ -105,6 +105,23 @@ class StudentsController < ApplicationController
     @past_students = Student.includes(:committees, :professors).past_students.order('last_name')
   end
   
+  def funding
+    data = Student.funding_by_year
+    pre_data = Student.funding_by_year(:prequal)
+    post_data = Student.funding_by_year(:postqual)
+    max = data.map { |i| i[1] }.max + 1000
+    min = data.map { |i| i[1] }.min - 1000
+    @h = LazyHighCharts::HighChart.new('graph') do |f|
+      f.options[:chart][:defaultSeriesType] = "line"
+      f.series(name: "Pre-Qualifier", data: pre_data, color: "#B80332")
+      f.series(name: "Post-Qualifier", data: post_data, color: "#3F779A")
+      f.xAxis(categories: data.map { |i| i[0].to_s }, title: { text: "Year" })
+      f.yAxis(max: max, min: min, title: { text: "Average Stipend" })
+      # f.legend(enabled: false)
+      f.title(text: "Average Stipend for Internally Supported Students")
+    end
+  end
+  
   private
   def admin_only
     unless current_professor.admin?

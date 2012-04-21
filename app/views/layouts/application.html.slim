@@ -9,6 +9,7 @@ html lang="en"
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     /! Le styles
+    = javascript_include_tag "application"
     css:
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -48,6 +49,7 @@ html lang="en"
                     li= link_to "Unsatisfied Alternate Research", students_incomplete_research_path
                     li= link_to "Incomplete CITI Training", students_incomplete_citi_path
                     li= link_to "View all offer letters (pdf)", letters_path(format: "pdf")
+                    li= link_to "Stipend throughout the years", students_funding_path
                     li.divider
                     li.nav-header Professors
                     li= link_to "Current Committees", professors_committees_path
@@ -81,8 +83,3 @@ html lang="en"
       footer
         p &copy; 2012 Georgia State University Department of Physics and Astronomy
         p.hide-from-pdf = link_to "Fork me on GitHub", "https://github.com/greggroth/grad_students"
-    /!
-      Le javascript
-      \==================================================
-    /! Placed at the end of the document so the pages load faster
-    = javascript_include_tag "application"

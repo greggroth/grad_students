@@ -55,6 +55,7 @@ gem 'pdfkit'
 gem 'foreman'
 gem 'unicorn'
 gem 'heroku', "~>2.6.1"
+gem 'lazy_high_charts','~> 1.1.5'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
