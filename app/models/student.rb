@@ -59,7 +59,7 @@ class Student < ActiveRecord::Base
   end
   
   def self.incomplete_qual
-    self.joins(:qualifier).where('degree = ? AND (qualifiers.em = false OR qualifiers.quantum = false OR qualifiers.stat_mech = false OR qualifiers.class_mech = false)', "PhD")
+    self.includes(:qualifier).where('degree = ? AND (qualifiers.em = false OR qualifiers.quantum = false OR qualifiers.stat_mech = false OR qualifiers.class_mech = false)', "PhD")
   end
   
   def self.incomplete_research(options={})
@@ -122,7 +122,7 @@ class Student < ActiveRecord::Base
     data = {}
     case options
     when :prequal
-    Student.all.keep_if { |stu| !stu.passed_qualifier? && !stu.externally_supported }
+    Student.includes(:qualifier).all.keep_if { |stu| !stu.passed_qualifier? && !stu.externally_supported }
               .group_by(&:phd_year)
               .delete_if { |k,v| k.nil? || k > Time.now.year }
               .each do |key, value|
@@ -130,7 +130,7 @@ class Student < ActiveRecord::Base
                 data[key] = (new_array.inject { |sum, n| sum + n }/new_array.length).to_i
                end
     when :postqual
-      Student.all.keep_if { |stu| stu.passed_qualifier? && !stu.externally_supported }
+      Student.includes(:qualifier).all.keep_if { |stu| stu.passed_qualifier? && !stu.externally_supported }
                 .group_by(&:phd_year)
                 .delete_if { |k,v| k.nil? || k > Time.now.year }
                 .each do |key, value|
@@ -138,7 +138,7 @@ class Student < ActiveRecord::Base
                   data[key] = (new_array.inject { |sum, n| sum + n }/new_array.length).to_i
                  end
     else
-      Student.all.group_by(&:phd_year)
+      Student.includes(:qualifier).all.group_by(&:phd_year)
                 .delete_if { |k,v| k.nil? || k > Time.now.year }
                 .each do |key, value|
                   new_array = value.map(&:funding)

@@ -36,6 +36,9 @@ group :development do
   gem 'pry-doc'
   gem 'awesome_print'
   gem 'taps', "~>0.3.23"
+  gem 'thin'
+  gem 'quiet_assets'
+  # gem 'foreman'
 end
 
 group :test do
@@ -52,8 +55,6 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'nested_form', git: 'git://github.com/ritchiey/nested_form.git'
 gem 'pdfkit'
-gem 'foreman'
-gem 'unicorn'
 gem 'heroku', "~>2.6.1"
 gem 'lazy_high_charts','~> 1.1.5'
 

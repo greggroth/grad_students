@@ -6,7 +6,6 @@ class StudentsController < ApplicationController
   def index    
     @current_students = Student.current_students.order('last_name')
     @past_students = Student.past_students.order('last_name')
-    
     respond_to do |format|
       format.html
       format.json { render json: @students }
@@ -16,7 +15,7 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
-    @student = Student.find(params[:id])
+    @student = Student.includes(:meetings, :qualifier, {:committees => :professor}).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
