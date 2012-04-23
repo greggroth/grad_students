@@ -60,6 +60,10 @@ $(document).ready ->
   listFilter($("form.filterform"), $('.list'))
 
   $('i.clear-search').click ->
-    $(this).prev('input').val('').trigger('change')    
+    $(this).prev('input').val('').trigger('change')
+    
+  $('.list tr').click ->
+    url = $(this).find('a.target_link').attr('href')
+    window.location.href = url if url
     
     

@@ -13,7 +13,7 @@ table.table.table-striped.list
   tbody
     - @professors.each do |professor|
       tr
-        td = link_to professor.full_name, professor, class: "filtered-by"
+        td = link_to professor.full_name, professor, class: "filtered-by target_link"
         td = mail_to professor.email, professor.email, class: "filtered-by"
         td = link_to 'Edit', edit_professor_path(professor)
 br

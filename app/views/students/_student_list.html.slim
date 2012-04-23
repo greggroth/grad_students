@@ -9,7 +9,7 @@ table.table.table-striped.list
     - students.each do |student|
       tr
         td 
-          = link_to student.full_name, student_path(student), class: "filtered-by"
+          = link_to student.full_name, student_path(student), class: "filtered-by target_link"
           - if student.status == "Left program early"
             span.label.label-warning Left Early
         - if student.current_student?
