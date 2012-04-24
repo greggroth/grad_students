@@ -19,7 +19,7 @@ class Professor < ActiveRecord::Base
                   :lab_coordinator
   has_many :committees, dependent: :destroy
   has_many :students, through: :committees
-  validates_presence_of :first_name, :last_name
+  validates_presence_of :first_name, :last_name, :email
   validates_uniqueness_of :last_name, scope: :first_name
   validates_associated :committees
 

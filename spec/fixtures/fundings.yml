@@ -1,0 +1,11 @@
+prequal:
+  source: "PhD: Pre-Qualifier"
+  amount: 20000
+
+postqual:
+  source: "PhD: Post-Qualifier"
+  amount: 21000
+
+masters:
+  source: "MS"
+  amount: 1000

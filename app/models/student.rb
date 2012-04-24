@@ -2,7 +2,6 @@ class Student < ActiveRecord::Base
   has_one :qualifier, dependent: :destroy
   has_many :committees, dependent: :destroy
   has_many :professors, through: :committees
-  # has_and_belongs_to_many :meetings, uniq: true
   has_many :meeting_attendances
   has_many :meetings, through: :meeting_attendances
   accepts_nested_attributes_for :committees, allow_destroy: true, reject_if: proc { |a| a['professor_id'].blank? }
@@ -14,8 +13,8 @@ class Student < ActiveRecord::Base
   validates_format_of :panther_id, with: /\d\d\d\-\d\d\-\d\d\d\d/, allow_nil: true, allow_blank: true
   validates_numericality_of :stipend, :year_entered, :ms_year, :phd_year, allow_nil: true
   
+  before_save :check_for_qualifier
   before_save :store_stipend_for_graduated_student
-  before_create :check_for_qualifier
   
   def to_param
     "#{id} #{full_name}".parameterize
@@ -90,12 +89,9 @@ class Student < ActiveRecord::Base
   
   def tests_passed
     # This doesn't feel right, but I don't have an alternative
-    Qualifier.where(student_id: id)
-             .select([:em, :stat_mech, :quantum, :class_mech, :biophysics, :astrophysics])
-             .collect { |t| [t.em, t.stat_mech, t.quantum, t.class_mech, t.biophysics, t.astrophysics] }
-             .first
-             .keep_if { |t| t }
-             .count
+    [:em,:stat_mech, :quantum, :class_mech, :biophysics, :astrophysics].map { |field| self.qualifier.send(field)}
+        .keep_if { |t| t }
+        .count
   end
   
   def passed_qualifier?
@@ -111,6 +107,15 @@ class Student < ActiveRecord::Base
     else
       Funding.prequal
     end
+  end
+  
+  def set_graduated
+    self.status = "Graduated"    
+  end
+  
+  def set_graduated!
+    self.set_graduated
+    self.save!
   end
   
   def current_student?
@@ -158,7 +163,6 @@ class Student < ActiveRecord::Base
   
   def store_stipend_for_graduated_student
     unless current_student?
-      puts "so far so good"
       self.stipend = self.funding
       self.unique_stipend = true
     end

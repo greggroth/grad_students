@@ -28,6 +28,8 @@ end
 
 group :test, :development do
   gem "rspec-rails", "~> 2.6"
+  gem 'factory_girl_rails'
+  gem 'forgery'
 end
 
 group :development do
@@ -39,6 +41,8 @@ group :development do
   gem 'thin'
   gem 'quiet_assets'
   # gem 'foreman'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
 end
 
 group :test do
