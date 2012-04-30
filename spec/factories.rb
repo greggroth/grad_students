@@ -30,8 +30,10 @@ FactoryGirl.define do
     trait :left_early do
       status   "Left program early"
     end
+    
+    factory :student_with_committee do
+      
+    end
   end
-  
-  
   
 end
